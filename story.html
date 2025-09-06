@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story</title>
+    <link rel="stylesheet" href="style\story_style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="screen" id="screen">
+
+        <button class = read-btn id = read-btn><i class='bx  bx-align-left'  ></i> </button>
+        <button class = pause-btn id = pause-btn><i class='bx  bx-pause'  ></i> </button>
+
+        <div class = "character-box" id = "character-box"></div>
+
+        <div class = "text-box" id = "text-box">
+            <p class = "story-text" id = "story-text"></p>
+            <p class = "conti-text" id = "conti-text">Press Spacebar to Continue...</p>
+        </div>
+        
+        <div class = "choices" id = "choices">
+            <div class = choice-1 id="choice-1"></div>
+            <div class = choice-2 id="choice-2"></div>
+        </div>
+
+        <div class = "background" id= "background"></div>
+            <div class = "alltext-box" id="alltext-box">
+                <p class = "all-text" id = "all-text"></p>
+                <button class="exit-text-btn" id="exit-text-btn"><i class='bx  bx-x'  ></i> </button>
+            </div>
+
+            <div class = "pause-menu" id="pause-menu">
+                <button class = "resume-btn" id = "resume-btn">Resume</button>
+                <button class = "restart-btn" id = "restart-btn">Restart</button>
+                <button class = "main-btn" id = "main-btn">Exit to Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script\story.js"></script>
+</body>
+</html>

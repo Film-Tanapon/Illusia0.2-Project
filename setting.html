@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illusia - Settings</title>
+    <link rel="stylesheet" href="style\setting.css">
+</head>
+<body>
+    <!-- หน้า Settings -->
+    <div class="settings-container" id="settings-container">
+        <button class="back-btn" onclick="window.history.back()">←</button>
+        <h2 class="settings-header">SETTINGS</h2>
+        
+        <!-- ส่วนการตั้งค่าข้อความ -->
+        <div class="settings-section">
+            <h3 class="section-title">TEXT</h3>
+            
+            <div class="settings-option">
+                <label for="text-speed">Text Speed</label>
+                <div class="option-control">
+                    <input type="range" id="text-speed" class="slider" min="1" max="10" value="5">
+                    <span id="text-speed-value" style="margin-left: 10px; width: 30px;">5</span>
+                </div>
+            </div>
+            <div class="speed-demo" id="text-demo">Text speed preview...</div>
+            
+            <div class="settings-option">
+                <label for="text-size">Text Size</label>
+                <select id="text-size" class="dropdown">
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+            
+            <div class="text-preview" id="text-preview">
+                This is how the text will appear in the game. You can adjust the size to your preference.
+            </div>
+        </div>
+        
+        <!-- ส่วนการตั้งค่าเสียง -->
+        <div class="settings-section">
+            <h3 class="section-title">AUDIO</h3>
+            
+            <div class="settings-option">
+                <label for="music-volume">Music Volume</label>
+                <div class="option-control">
+                    <input type="range" id="music-volume" class="slider" min="0" max="100" value="70">
+                    <span id="music-volume-value" style="margin-left: 10px; width: 30px;">70%</span>
+                </div>
+            </div>
+            
+            <div class="settings-option">
+                <label for="voice-volume">Voice Volume</label>
+                <div class="option-control">
+                    <input type="range" id="voice-volume" class="slider" min="0" max="100" value="80">
+                    <span id="voice-volume-value" style="margin-left: 10px; width: 30px;">80%</span>
+                </div>
+            </div>
+            
+            <div class="settings-option">
+                <label for="sfx-volume">SFX Volume</label>
+                <div class="option-control">
+                    <input type="range" id="sfx-volume" class="slider" min="0" max="100" value="60">
+                    <span id="sfx-volume-value" style="margin-left: 10px; width: 30px;">60%</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-buttons">
+            <button class="settings-btn" id="defaults-btn">Restore Defaults</button>
+            <button class="settings-btn" id="cancel-btn">Cancel</button>
+            <button class="settings-btn" id="save-btn">Save</button>
+        </div>
+    </div>
+
+    <script src="script\setting.js"></script>
+</body>
+</html>

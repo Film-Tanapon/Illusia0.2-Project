@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap');
+
+body {
+    background: linear-gradient(to bottom, black, red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: "Baskervville", serif;
+}
+
+.settings-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #ff0400;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 25px rgba(255, 4, 0, 0.6);
+}
+
+.settings-header {
+    color: #ff0400;
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(255, 4, 0, 0.5);
+}
+
+.settings-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 4, 0, 0.3);
+}
+
+.section-title {
+    color: #ff0400;
+    font-size: 24px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.settings-option {
+    margin-bottom: 15px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-option label {
+    flex: 1;
+}
+
+.option-control {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.slider {
+    width: 70%;
+    height: 12px;
+    -appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ff0400;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown {
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ff0400;
+    color: white;
+    border-radius: 5px;
+    font-family: "Baskervville", serif;
+    font-size: 16px;
+    width: 150px;
+}
+
+.text-preview {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 4, 0, 0.3);
+    font-size: 16px;
+    line-height: 1.5;
+    color: white;
+}
+
+.settings-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.settings-btn {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: "Baskervville", serif;
+    transition: all 0.3s;
+}
+
+.settings-btn:hover {
+    background-color: rgb(255, 255, 255);
+    transform: translateY(-2px);
+}
+
+#save-btn { background-color: rgba(0, 200, 0, 0.6); color: white; }
+#save-btn:hover { background-color: rgb(0, 200, 0); }
+
+#cancel-btn { background-color: rgba(255, 4, 0, 0.6); color: white; }
+#cancel-btn:hover { background-color: rgb(255, 4, 0); }
+
+.speed-demo { color: #ccc; font-style: italic; margin-top: 5px; font-size: 14px; }
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 4, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-btn:hover { background: rgb(255, 4, 0); }
