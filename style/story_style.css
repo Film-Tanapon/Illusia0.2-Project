@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=Thasadith:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+* {
+    cursor: url("../picture/Illusia_cursor.cur"), auto;
+}
+
 body{
     margin:0;
     background-color : white;
@@ -346,7 +350,6 @@ body{
     font-size: 18px;
     font-weight: 700;
     font-style: normal;
-    cursor: grab;
 }
 
 .choice-1:hover{
@@ -357,10 +360,6 @@ body{
         0 0 10px #ff0400,
         0 0 10px #ff0400,
         0 0 20px #ff0400;
-}
-
-.choice-1:active{
-    cursor: grabbing;
 }
 
 .choice-2{
@@ -380,7 +379,6 @@ body{
     font-size: 18px;
     font-weight: 700;
     font-style: normal;
-    cursor: grab;
 }
 
 .choice-2:hover{
@@ -391,8 +389,4 @@ body{
         0 0 10px #ff0400,
         0 0 10px #ff0400,
         0 0 20px #ff0400;
-}
-
-.choice-2:active{
-    cursor: grabbing;
 }

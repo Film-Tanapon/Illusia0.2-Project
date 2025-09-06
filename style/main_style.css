@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap');
-
+* {
+    cursor: url("../picture/Illusia_cursor.cur"), auto;
+}
 body{
     background : black;
     background-repeat: no-repeat;
@@ -10,7 +12,6 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    cursor : url("/picture/Illusia_cursor.PNG"), auto;
 }
 .project-name{
     color: #ffffff;
@@ -42,7 +43,6 @@ body{
     margin: 10px auto;
     margin-bottom: 1%;
     font-size: clamp(18px, 4vw, 32px);
-    cursor: grab;
     font-family: "Baskervville", serif;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -69,8 +69,4 @@ body{
         0 0 20px #ff0400,
         0 0 40px #ff0000;
     transform: scale(1.05) rotate(-5deg);
-}
-
-.btn:active{
-    cursor:grabbing;
 }
