@@ -10,7 +10,7 @@ body{
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    cursor : url("https://ani.cursors-4u.net/games/images16/gam1570.png"), auto;
+    cursor : url("/picture/Illusia_cursor.PNG"), auto;
 }
 .project-name{
     color: #ffffff;
