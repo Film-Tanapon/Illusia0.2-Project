@@ -198,11 +198,11 @@ function typeWriter(text, callback){
     textBox.style.display = "flex";
     let textSpeed = localStorage.getItem('textSpeed') || 5;
     let delayLetter = 60;
-    if(textSpeed <= 4){
-        delayLetter = 175 - 25 * textSpeed;
-    }else if(textSpeed <= 9){
-        delayLetter = 85 - 5 * textSpeed;
-    }else if(textSpeed == 10){
+    if(textSpeed == 1){
+        delayLetter = 120;
+    }else if(textSpeed == 2){
+        delayLetter = 60;
+    }else if(textSpeed == 3){
         delayLetter = 30;
     }
 

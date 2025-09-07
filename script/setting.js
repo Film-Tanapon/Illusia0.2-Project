@@ -2,10 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelBtn = document.getElementById('cancel-btn');
     const saveBtn = document.getElementById('save-btn');
     const defaultsBtn = document.getElementById('defaults-btn');
-
-    function closeSettings() { window.history.back(); }
-    cancelBtn.addEventListener('click', closeSettings);
-
     const textSpeed = localStorage.getItem('textSpeed') || 5;
     const textSize = localStorage.getItem('textSize') || 'medium';
     const musicVolume = localStorage.getItem('musicVolume') || 70;
@@ -22,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('sfx-volume').value = sfxVolume;
     document.getElementById('sfx-volume-value').textContent = sfxVolume + '%';
 
+    function closeSettings() { window.history.back(); }
+    cancelBtn.addEventListener('click', closeSettings);
+
     function updateTextPreview() {
         const size = document.getElementById('text-size').value;
         const preview = document.getElementById('text-preview');
@@ -29,9 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateTextDemo() {
-        const speed = document.getElementById('text-speed').value;
+        const speed = parseInt(document.getElementById('text-speed').value);
         const demo = document.getElementById('text-demo');
-        demo.textContent = speed < 3 ? "Slow text speed..." : speed < 7 ? "Medium text speed..." : "Fast text speed...";
+        let speedLabel;
+
+        switch(speed){
+            case 1: speedLabel = "Slow"; break;
+            case 2: speedLabel = "Medium"; break;
+            case 3: speedLabel = "Fast"; break;
+            default: speedLabel = "Medium";
+    }
+
+        demo.textContent = speedLabel + " text speed...";
+        document.getElementById('text-speed-value').textContent = speedLabel;
     }
 
     const sliders = document.querySelectorAll('.slider');
@@ -73,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Default settings restored!');
     });
 
+    document.getElementById('text-speed').addEventListener('input', updateTextDemo);
     updateTextPreview();
     updateTextDemo();
 });

@@ -8,12 +8,14 @@ body{
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     min-height: 100vh;
     margin: 0;
 }
 .project-name{
+    margin-top: 5vh;
+    margin-right: 10%;
     color: #ffffff;
     position : top;
     margin-bottom: 10vh;
@@ -40,8 +42,8 @@ body{
     border: 2px solid #800000;
     color: black;
     min-width: clamp(100px, 15vw, 300px);
-    margin: 10px auto;
-    margin-bottom: 1%;
+    margin-right: 25%;
+    margin-bottom: 25px;
     font-size: clamp(18px, 4vw, 32px);
     font-family: "Baskervville", serif;
     font-optical-sizing: auto;
