@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap');
-
+*{
+    cursor : url("../picture/Illusia_cursor.cur"), auto;
+}
 body {
-    background : black;
+    background-image : url("../picture/Index_image.PNG");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;

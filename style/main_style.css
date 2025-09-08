@@ -3,9 +3,11 @@
     cursor: url("../picture/Illusia_cursor.cur"), auto;
 }
 body{
-    background : black;
+    background-image : url("../picture/Index_image.PNG");
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -13,27 +15,9 @@ body{
     min-height: 100vh;
     margin: 0;
 }
-.project-name{
-    margin-top: 5vh;
-    margin-right: 10%;
-    color: #ffffff;
-    position : top;
-    margin-bottom: 10vh;
-    font-size: clamp(60px, 15vw, 250px);
-    font-weight: 800;
-    font-style: normal;
-    letter-spacing: clamp(1vw, 1vw, 30px);
-    text-align: center;
-
-    text-shadow:
-        0 0 5px #ff0400,
-        0 0 10px #ff0400,
-        0 0 20px #ff0400,
-        0 0 40px #ff0000,
-        0 0 80px #ff0000,
-        0 0 90px #ff0000;
+#start-btn{
+    margin-top : 20vw;
 }
-
 .btn{
     display:block;
     background-color: rgba(30, 0, 0, 0.7);
@@ -42,7 +26,7 @@ body{
     border: 2px solid #800000;
     color: black;
     min-width: clamp(100px, 15vw, 300px);
-    margin-right: 25%;
+    margin-right: 22.5%;
     margin-bottom: 25px;
     font-size: clamp(18px, 4vw, 32px);
     font-family: "Baskervville", serif;
