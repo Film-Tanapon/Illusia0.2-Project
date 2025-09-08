@@ -38,21 +38,17 @@ const story = {
 
     scene_3_cutscene: {
         text: "เมื่อคุณลืมตาขึ้นมาอีกครั้ง คุณกลับเห็นเพดานห้องสีขาว ตัวคุณนอนราบอยู่บนเตียง ขยำเสื้อตัวเองจนแทบจิกเข้าเนื้อ- เหงื่อกาฬคุณไหลซึมจนเปียกชื้น คุณค่อย ๆ หยัดกายลุกขึ้นเชื่องช้า",
-        background : "",
+        background : "../picture/background_story/scene_3_cutscene.PNG",
         next: "scene_4"
     },
 
     scene_4: {
         text: "ภาพตรงหน้าเรียกได้ว่าเป็นห้องนอนห้องหนึ่ง คุณกวาดสายตามองไปรอบ ๆ ความคุ้นเคยที่เพิ่มขึ้นทีละน้อยทำให้คุณมั่นใจ- ไม่ผิดแน่ นี่คือห้องของพ่อแม่คุณ, ห้องที่คุณไม่ได้รับอนุญาตให้เข้ามาได้โดยง่าย ห้องที่คุณจำต้องแอบเข้ามาอย่างเงียบเชียบ แต่ความทรงจำที่เลือนรางกลับชวนให้คุณรู้สึกว่ามันประหลาด ...",
         background : "",
-        character: "https://cdn.discordapp.com/attachments/1408368721583538176/1413750992821944391/IMG_6585.png?ex=68bd11b6&is=68bbc036&hm=c224492325ef63cf8a5a1b0a501e1054392c6f09cd91a83d877f660ca1d8e0e9",
-        delay_character : 0,
+        characterleft: "../picture/Character/Character01.PNG",
+        delay_characterleft : 500,
         choice1: {text : "สำรวจห้องนอน",next : "explore_1"},
         choice2: {text : "ไม่สำรวจห้องนอน",next : "scare_1_cutscence"},
-        choice_position_top1: "",
-        choice_position_right1: "",
-        choice_position_top2: "",
-        choice_position_right2: ""
     },
 
     explore_1: {
@@ -90,7 +86,7 @@ const story = {
 
     explore_opendoor_cutscence: {
         text: "คุณกลั้นใจผลักบานประตูเข้าไป ภาพตรงหน้าคือแสงจันทร์สาดกระทบลงบนเรือนร่างหญิงสาว เธอใส่ชุดสีขาวนวล รายล้อมด้วยเหล่าผีเสื้อราวผกาหอม เมื่อคุณเลื่อนสายตาขึ้นสบ จึงได้พบกับเธอที่ยิ้มให้คุณอย่างอ่อนโยน ...",
-        background : "",
+        background : "../picture/background_story/explore_opendoor_cutscence.PNG",
         next: ""
     },
 
