@@ -25,6 +25,17 @@ let all_text = "";
 let isTyping = false;
 let advanceLock = false;
 
+const preloadImages = () => {
+  const urls = Object.values(story)
+    .map(scene => scene.background)
+    .filter(url => url); // เอาเฉพาะที่มี background
+
+  urls.forEach(url => {
+    const img = new Image();
+    img.src = url; // preload
+  });
+};
+
 const story = {
     scene_1: {
         text: "\"แฮ่ก- แฮ่ก ..\"\nร่างกายคุณอาบชุ่มไปด้วยเหงื่อ เสียงลมหวีดหวิวสวนทางกับคุณที่พุ่งตรงไปด้านหน้า อะดรีนาลีนที่หลั่งทำให้ฝีเท้าคุณก้าวยาวขึ้น คุณวิ่งเร็วขึ้นเรื่อย ๆ จนกระทั่ง ..",
@@ -145,6 +156,34 @@ const story = {
     }
 
 };
+
+function preloadAllImages(storyObj, callback) {
+    const images = [];
+    for (const key in storyObj) {
+        const scene = storyObj[key];
+        if (scene.background) images.push(scene.background);
+        if (scene.characterleft) images.push(scene.characterleft);
+        if (scene.characterright) images.push(scene.characterright);
+    }
+
+    const total = images.length;
+    let loaded = 0;
+
+    const progressBar = document.getElementById("progress-bar");
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+        img.onload = img.onerror = () => {
+            loaded++;
+            const percent = Math.round((loaded / total) * 100);
+            progressBar.style.width = percent + "%";
+            if (loaded === total) callback();
+        };
+    });
+
+    if (images.length === 0) callback();
+}
 
 function loadScene(scene){
     currentScene = scene;
@@ -358,4 +397,4 @@ mainBtn.addEventListener("click",() =>{
     window.location.href="index.html";
 });
 
-window.addEventListener("load", () => loadScene("scene_1"));
+window.addEventListener("load", () => loadScene("scene_1"),preloadImages());
