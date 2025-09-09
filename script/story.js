@@ -27,12 +27,21 @@ const story = {
     scene_1: {
         text: "\"แฮ่ก- แฮ่ก ..\"\nร่างกายคุณอาบชุ่มไปด้วยเหงื่อ เสียงลมหวีดหวิวสวนทางกับคุณที่พุ่งตรงไปด้านหน้า อะดรีนาลีนที่หลั่งทำให้ฝีเท้าคุณก้าวยาวขึ้น คุณวิ่งเร็วขึ้นเรื่อย ๆ จนกระทั่ง ..",
         background : "",
-        next: "scene_2"
+        next: "delay_1_scene_1"
     },
-
+    delay_1_scene_1: {
+        background : "../picture/background_story/delay_1_scene_1.PNG",
+        next: "delay_2_scene_1",
+        delay: 1000
+    },
+    delay_2_scene_1 : {
+        background : "../picture/background_story/delay_2_scene_1.PNG",
+        next: "scene_2",
+        delay: 1000
+    },
     scene_2: {
         text: "‘ ตุบ- ’\nสายตาคุณมืดมิด ประสาทการรับรู้ถูกปิดกั้นด้วยบางสิ่ง คล้ายลมหายใจจะพาลสะดุดไปด้วย",
-        background : "",
+        background : "../picture/background_story/scene_2.PNG",
         next: "scene_3_cutscene",
     },
 
@@ -155,7 +164,7 @@ function loadScene(scene){
 
     if (sceneData.delay) {
         setTimeout(() => {
-            if (sceneData.next) loadStory(sceneData.next);
+            if (sceneData.next) loadScene(sceneData.next);
         }, sceneData.delay);
         return;
     }
@@ -285,9 +294,13 @@ function preloadNextImages(currentScene, count = 5) {
             const img = new Image();
             img.src = scene.background;
         }
-        if (scene.character) {
-            const charImg = new Image();
-            charImg.src = scene.character;
+        if (scene.characterleft) {
+            const img = new Image();
+            img.src = scene.characterleft;
+        }
+        if (scene.characterright) {
+            const img = new Image();
+        img.src = scene.characterright;
         }
     });
 }
