@@ -21,7 +21,6 @@ const preloadBar = document.getElementById("preload-bar");
 const preloadPercent = document.getElementById("preload-percent");
 const loadingScreen = document.getElementById("load-image");
 
-
 let currentScene = null;
 let typeInterval = null;
 let all_text = "";
@@ -64,6 +63,10 @@ const story = {
         delay_characterleft : 700,
         choice1: {text : "สำรวจห้องนอน",next : "explore_1"},
         choice2: {text : "ไม่สำรวจห้องนอน",next : "scare_1_cutscence"},
+        choice_position_top1: "35%",
+        choice_position_left1: "50%%",
+        choice_position_top2: "55%",
+        choice_position_left2: "50%"
     },
 
     explore_1: {
@@ -94,9 +97,9 @@ const story = {
         choice1: {text : "เปิดประตูห้องตรงหน้า",next : "explore_opendoor_cutscence"},
         choice2: {text : "ลงไปชั้นล่าง",next : "explore_downstair"},
         choice_position_top1: "",
-        choice_position_right1: "",
-        choice_position_top2: "",
-        choice_position_right2: ""
+        choice_position_left1: "78.5%",
+        choice_position_top2: "75%",
+        choice_position_left2: "35%"
     },
 
     explore_opendoor_cutscence: {
@@ -287,7 +290,7 @@ function choiceSetup(sceneData) {
         choiceBtn1.style.display = "flex";
         choiceBtn1.innerHTML = sceneData.choice1.text;
         choiceBtn1.style.top = sceneData.choice_position_top1;
-        choiceBtn1.style.right = sceneData.choice_position_right1;
+        choiceBtn1.style.left = sceneData.choice_position_left1;
         choiceBtn1.onclick = () => {
             if (advanceLock) return; // ✅ กัน spam click
             advanceLock = true;
@@ -298,7 +301,7 @@ function choiceSetup(sceneData) {
         choiceBtn2.style.display = "flex";
         choiceBtn2.innerHTML = sceneData.choice2.text;
         choiceBtn2.style.top = sceneData.choice_position_top2;
-        choiceBtn2.style.right = sceneData.choice_position_right2;
+        choiceBtn2.style.left = sceneData.choice_position_left2;
         choiceBtn2.onclick = () => {
             if (advanceLock) return; // ✅ กัน spam click
             advanceLock = true;
