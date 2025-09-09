@@ -17,6 +17,9 @@ const pauseMenu = document.getElementById("pause-menu")
 const resumeBtn = document.getElementById("resume-btn")
 const restartBtn = document.getElementById("restart-btn")
 const mainBtn = document.getElementById("main-btn")
+const preloadBar = document.getElementById("preload-bar");
+const preloadPercent = document.getElementById("preload-percent");
+const loadingScreen = document.getElementById("load-image");
 
 
 let currentScene = null;
@@ -169,20 +172,28 @@ function preloadAllImages(storyObj, callback) {
     const total = images.length;
     let loaded = 0;
 
-    const progressBar = document.getElementById("progress-bar");
-
     images.forEach(src => {
         const img = new Image();
         img.src = src;
         img.onload = img.onerror = () => {
             loaded++;
             const percent = Math.round((loaded / total) * 100);
-            progressBar.style.width = percent + "%";
-            if (loaded === total) callback();
+            preloadBar.style.width = percent + "%";
+            preloadPercent.textContent = percent + "%";
+
+            if (loaded === total) {
+                setTimeout(() => {
+                    loadingScreen.style.display = "none"; // ✅ ซ่อนหน้าโหลด
+                    callback();
+                }, 500); // ดีเลย์เล็กน้อยให้เห็น 100%
+            }
         };
     });
 
-    if (images.length === 0) callback();
+    if (images.length === 0) {
+        loadingScreen.style.display = "none";
+        callback();
+    }
 }
 
 function loadScene(scene){
@@ -397,4 +408,8 @@ mainBtn.addEventListener("click",() =>{
     window.location.href="index.html";
 });
 
-window.addEventListener("load", () => loadScene("scene_1"),preloadImages());
+window.addEventListener("load", () => {
+    preloadAllImages(story, () => {
+        loadScene("scene_1");
+    });
+});
