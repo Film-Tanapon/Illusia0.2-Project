@@ -6,15 +6,17 @@ body{
     background-image : url("../picture/Index_image.PNG");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+    background-position: center center;
+    background-size: contain;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+    background-color: black;
 }
+
 #start-btn{
     margin-top : 20vw;
 }

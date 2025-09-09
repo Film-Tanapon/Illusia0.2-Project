@@ -22,6 +22,8 @@ const mainBtn = document.getElementById("main-btn")
 let currentScene = null;
 let typeInterval = null;
 let all_text = "";
+let isTyping = false;
+let advanceLock = false;
 
 const story = {
     scene_1: {
@@ -184,10 +186,10 @@ function loadScene(scene){
     }
 
     if (sceneData.text){
-    // รอ delay ก่อนค่อยเริ่ม typewriter
         setTimeout(()=>{
             readBtn.style.display = "flex";
             pauseBtn.style.display = "flex";
+            advanceLock = false; // ✅ ปลด lock หลัง loadScene เริ่ม
             typeWriter(sceneData.text, () => {
                 contiText.style.display = "flex";
             });
@@ -225,7 +227,6 @@ function typeWriter(text, callback){
             callback?.();
         }
     }, delayLetter)
-
 }
 
 function fullText(text){
@@ -247,35 +248,38 @@ function choiceSetup(sceneData) {
         choiceBtn1.innerHTML = sceneData.choice1.text;
         choiceBtn1.style.top = sceneData.choice_position_top1;
         choiceBtn1.style.right = sceneData.choice_position_right1;
-        choiceBtn1.onclick = () => loadScene(sceneData.choice1.next);
-    } else {
-        choiceBtn1.style.display = "none";
+        choiceBtn1.onclick = () => {
+            if (advanceLock) return; // ✅ กัน spam click
+            advanceLock = true;
+            loadScene(sceneData.choice1.next);
+        };
     }
-
     if (sceneData.choice2) {
         choiceBtn2.style.display = "flex";
         choiceBtn2.innerHTML = sceneData.choice2.text;
         choiceBtn2.style.top = sceneData.choice_position_top2;
         choiceBtn2.style.right = sceneData.choice_position_right2;
-        choiceBtn2.onclick = () => loadScene(sceneData.choice2.next);
-    } else {
-        choiceBtn2.style.display = "none";
+        choiceBtn2.onclick = () => {
+            if (advanceLock) return; // ✅ กัน spam click
+            advanceLock = true;
+            loadScene(sceneData.choice2.next);
+        };
     }
 }
 
 function proceedStory() {
-  const sceneData = story[currentScene];
-  if (isTyping) return;
+    if (advanceLock || isTyping) return; // ✅ ตรวจสอบ lock ก่อน
+    const sceneData = story[currentScene];
 
-  // ตรวจสอบว่าฉากสุดท้าย
-  if (currentScene === "end") {
-    window.location.href = "index.html"; // กลับไปหน้า index.html
-    return;
-  }
+    if (currentScene === "end") {
+        window.location.href = "index.html";
+        return;
+    }
 
-  if (sceneData.choice1 || sceneData.choice2) {
+    if (sceneData.choice1 || sceneData.choice2) {
         choiceSetup(sceneData);
     } else if (sceneData.next) {
+        advanceLock = true;
         loadScene(sceneData.next);
     }
 }
@@ -306,16 +310,18 @@ function preloadNextImages(currentScene, count = 5) {
 }
 
 textBox.addEventListener("click", () => {
+    if (advanceLock) return; // ✅ ป้องกัน spam click
     if (isTyping) {
         fullText(story[currentScene].text);
-    }else{
+    } else {
         proceedStory();
     }
 });
 
 document.addEventListener("keydown", (e) => {
-    if(e.code === "Space"){
+    if (e.code === "Space") {
         e.preventDefault();
+        if (advanceLock) return; // ✅ กัน spam space
         if (isTyping) {
             fullText(story[currentScene].text);
         } else {
