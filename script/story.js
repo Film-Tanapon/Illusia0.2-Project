@@ -28,16 +28,6 @@ let all_text = "";
 let isTyping = false;
 let advanceLock = false;
 
-const preloadImages = () => {
-  const urls = Object.values(story)
-    .map(scene => scene.background)
-    .filter(url => url); // เอาเฉพาะที่มี background
-
-  urls.forEach(url => {
-    const img = new Image();
-    img.src = url; // preload
-  });
-};
 
 const story = {
     scene_1: {
@@ -46,31 +36,31 @@ const story = {
         next: "delay_1_scene_1"
     },
     delay_1_scene_1: {
-        background : "../picture/background_story/delay_1_scene_1.PNG",
+        background : "../picture/background_story/delay_1_scene_1.jpg",
         next: "delay_2_scene_1",
         delay: 1000
     },
     delay_2_scene_1 : {
-        background : "../picture/background_story/delay_2_scene_1.PNG",
+        background : "../picture/background_story/delay_2_scene_1.jpg",
         next: "scene_2",
         delay: 1000
     },
     scene_2: {
         text: "‘ ตุบ- ’\nสายตาคุณมืดมิด ประสาทการรับรู้ถูกปิดกั้นด้วยบางสิ่ง คล้ายลมหายใจจะพาลสะดุดไปด้วย",
-        background : "../picture/background_story/scene_2.PNG",
+        background : "../picture/background_story/scene_2.jpg",
         next: "scene_3_cutscene",
     },
 
     scene_3_cutscene: {
         text: "เมื่อคุณลืมตาขึ้นมาอีกครั้ง คุณกลับเห็นเพดานห้องสีขาว ตัวคุณนอนราบอยู่บนเตียง ขยำเสื้อตัวเองจนแทบจิกเข้าเนื้อ- เหงื่อกาฬคุณไหลซึมจนเปียกชื้น คุณค่อย ๆ หยัดกายลุกขึ้นเชื่องช้า",
-        background : "../picture/background_story/scene_3_cutscene.PNG",
+        background : "../picture/background_story/scene_3_cutscene.jpg",
         next: "scene_4"
     },
 
     scene_4: {
         text: "ภาพตรงหน้าเรียกได้ว่าเป็นห้องนอนห้องหนึ่ง คุณกวาดสายตามองไปรอบ ๆ ความคุ้นเคยที่เพิ่มขึ้นทีละน้อยทำให้คุณมั่นใจ- ไม่ผิดแน่ นี่คือห้องของพ่อแม่คุณ, ห้องที่คุณไม่ได้รับอนุญาตให้เข้ามาได้โดยง่าย ห้องที่คุณจำต้องแอบเข้ามาอย่างเงียบเชียบ แต่ความทรงจำที่เลือนรางกลับชวนให้คุณรู้สึกว่ามันประหลาด ...",
-        background : "../picture/background_story/scene_4.PNG",
-        characterleft: "../picture/Character/Character01.PNG",
+        background : "../picture/background_story/scene_4.jpg",
+        characterleft: "../picture/Character/Character01.png",
         delay_characterleft : 700,
         choice1: {text : "สำรวจห้องนอน",next : "explore_1"},
         choice2: {text : "ไม่สำรวจห้องนอน",next : "scare_1_cutscence"},
@@ -78,19 +68,19 @@ const story = {
 
     explore_1: {
         text: "คุณตัดสินใจทำลายความสงสัยด้วยการสำรวจ เช่นวัยอยากรู้อยากเห็น- เพียงแต่มีจังหวะชีพจรที่อาจถูกพรากไปได้ทุกเมื่อเข้ามาเกี่ยวข้องเท่านั้น, คุณกวาดสายตา มือไล่ไปตามตู้เตียง ทุกอย่างดูปกติ เว้นเสียแต่สมุดเล่มหนึ่งที่วางเด่นกลางโต๊ะไม้ สภาพมันคล้ายใกล้จะพังเต็มที คุณหยิบมันขึ้นมา",
-        background : "../picture/background_story/explore_1.PNG",
+        background : "../picture/background_story/explore_1.jpg",
         next: "explore_2"
     },
 
     explore_2: {
         text: "หน้าสมุดมีรอยเปรอะเปื้อนสีน้ำตาลเข้ม คุณใช้ปลายนิ้วลูบผ่าน มันแห้งกรัง- จำเป็นจับมันด้วยสองมือเพื่อเปิดอ่าน ภายในมีเพียงรูปภาพจาง ๆ หนึ่งรูปและข้อความที่คล้ายประวัติส่วนตัว หน้ากระดาษบางส่วนขาดหายไป",
-        background : "../picture/background_story/explore_2.PNG",
+        background : "../picture/background_story/explore_2.jpg",
         next: "explore_3"
     },
 
     explore_3: {
         text: "คุณใช้เวลาในการอ่านราวหลายนาที เนื้อหาในนั้นไม่ต่างจากสมุดบันทึกทั่วไปที่คุณพอจะคาดเดาได้ ทอดถอนหายใจก่อนเงยหน้าขึ้นมา ประตูห้องอยู่ตรงหน้าคุณ- แม้จะยังสับสน แต่หากไม่ออกไปข้างนอกคงได้ติดอยู่ในห้องนี้ตลอดไปแน่",
-        background : "../picture/background_story/explore_3.PNG",
+        background : "../picture/background_story/explore_3.jpg",
         character: "",
         delay_character : 0,
         next: "explore_4"
@@ -98,7 +88,7 @@ const story = {
 
     explore_4: {
         text: "คุณก้าวขาออกมาด้านนอก ภาพตรงหน้าคือทางเดินทอดยาวไปสุดปลายทางอันคือห้องนอนคุณเอง แต่ระหว่างนั้นจำต้องผ่านห้องหนึ่งไปก่อน ทว่าเมื่อคุณลองเปิดประตูกลับพบว่ามันถูกล็อคเอาไว้ คุณขมวดคิ้วอย่างฉงน- ทางเลือกถูกตัดออกไป ตอนนี้คุณจึงยืนอยู่หน้าห้องนอนของคุณ เสียงกุกกักด้านในดังลอดผ่านมาให้คุณได้ยิน ฝ่ามือคุณชะงัก พลันหันมองไปยังบันไดข้าง ๆ",
-        background : "../picture/background_story/explore_4.PNG",
+        background : "../picture/background_story/explore_4.jpg",
         character: "",
         delay_character : 0,
         choice1: {text : "เปิดประตูห้องตรงหน้า",next : "explore_opendoor_cutscence"},
@@ -111,7 +101,7 @@ const story = {
 
     explore_opendoor_cutscence: {
         text: "คุณกลั้นใจผลักบานประตูเข้าไป ภาพตรงหน้าคือแสงจันทร์สาดกระทบลงบนเรือนร่างหญิงสาว เธอใส่ชุดสีขาวนวล รายล้อมด้วยเหล่าผีเสื้อราวผกาหอม เมื่อคุณเลื่อนสายตาขึ้นสบ จึงได้พบกับเธอที่ยิ้มให้คุณอย่างอ่อนโยน ...",
-        background : "../picture/background_story/explore_opendoor_cutscence.PNG",
+        background : "../picture/background_story/explore_opendoor_cutscence.jpg",
         next: ""
     },
 
