@@ -3,11 +3,12 @@
     cursor : url("../picture/Illusia_cursor.cur"), auto;
 }
 body {
+    background-color: black;
     background-image : url("../picture/Index_image.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+    background-position: center center;
+    background-size: contain;
     display: flex;
     flex-direction: column;
     align-items: center;
