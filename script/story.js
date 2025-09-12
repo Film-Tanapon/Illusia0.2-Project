@@ -37,12 +37,12 @@ const story = {
     delay_1_scene_1: {
         background : "../picture/background_story/delay_1_scene_1.jpg",
         next: "delay_2_scene_1",
-        delay: 1000
+        delay: 500
     },
     delay_2_scene_1 : {
         background : "../picture/background_story/delay_2_scene_1.jpg",
         next: "scene_2",
-        delay: 1000
+        delay: 500
     },
     scene_2: {
         text: "‘ ตุบ- ’\nสายตาคุณมืดมิด ประสาทการรับรู้ถูกปิดกั้นด้วยบางสิ่ง คล้ายลมหายใจจะพาลสะดุดไปด้วย",
@@ -60,7 +60,7 @@ const story = {
         text: "ภาพตรงหน้าเรียกได้ว่าเป็นห้องนอนห้องหนึ่ง คุณกวาดสายตามองไปรอบ ๆ ความคุ้นเคยที่เพิ่มขึ้นทีละน้อยทำให้คุณมั่นใจ- ไม่ผิดแน่ นี่คือห้องของพ่อแม่คุณ, ห้องที่คุณไม่ได้รับอนุญาตให้เข้ามาได้โดยง่าย ห้องที่คุณจำต้องแอบเข้ามาอย่างเงียบเชียบ แต่ความทรงจำที่เลือนรางกลับชวนให้คุณรู้สึกว่ามันประหลาด ...",
         background : "../picture/background_story/scene_4.jpg",
         characterleft: "../picture/Character/Character01.png",
-        delay_characterleft : 700,
+        delay_characterleft : 0,
         choice1: {text : "สำรวจห้องนอน",next : "explore_1"},
         choice2: {text : "ไม่สำรวจห้องนอน",next : "scare_1_cutscence"},
         choice_position_top1: "35%",
@@ -176,9 +176,9 @@ function preloadAllImages(storyObj, callback) {
 
             if (loaded === total) {
                 setTimeout(() => {
-                    loadingScreen.style.display = "none"; // ✅ ซ่อนหน้าโหลด
+                    loadingScreen.style.display = "none";
                     callback();
-                }, 500); // ดีเลย์เล็กน้อยให้เห็น 100%
+                }, 500);
             }
         };
     });
@@ -292,7 +292,7 @@ function choiceSetup(sceneData) {
         choiceBtn1.style.top = sceneData.choice_position_top1;
         choiceBtn1.style.left = sceneData.choice_position_left1;
         choiceBtn1.onclick = () => {
-            if (advanceLock) return; // ✅ กัน spam click
+            if (advanceLock) return;
             advanceLock = true;
             loadScene(sceneData.choice1.next);
         };
@@ -303,7 +303,7 @@ function choiceSetup(sceneData) {
         choiceBtn2.style.top = sceneData.choice_position_top2;
         choiceBtn2.style.left = sceneData.choice_position_left2;
         choiceBtn2.onclick = () => {
-            if (advanceLock) return; // ✅ กัน spam click
+            if (advanceLock) return;
             advanceLock = true;
             loadScene(sceneData.choice2.next);
         };
@@ -311,7 +311,7 @@ function choiceSetup(sceneData) {
 }
 
 function proceedStory() {
-    if (advanceLock || isTyping) return; // ✅ ตรวจสอบ lock ก่อน
+    if (advanceLock || isTyping) return;
     const sceneData = story[currentScene];
 
     if (currentScene === "end") {
@@ -353,7 +353,7 @@ function preloadNextImages(currentScene, count = 5) {
 }
 
 textBox.addEventListener("click", () => {
-    if (advanceLock) return; // ✅ ป้องกัน spam click
+    if (advanceLock) return;
     if (isTyping) {
         fullText(story[currentScene].text);
     } else {
@@ -364,7 +364,7 @@ textBox.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
     if (e.code === "Space") {
         e.preventDefault();
-        if (advanceLock) return; // ✅ กัน spam space
+        if (advanceLock) return;
         if (isTyping) {
             fullText(story[currentScene].text);
         } else {
