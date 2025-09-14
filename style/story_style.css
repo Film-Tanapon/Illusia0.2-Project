@@ -138,8 +138,8 @@ body{
     position: absolute;
     top : 1%;
     right : 1%;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 }
 
 .bx-x {
@@ -307,7 +307,7 @@ body{
     display : flex;
     border : rgb(160, 0, 0) solid;
     padding: 0px 20px 20px 20px;
-    width: 80%;
+    width: 75%;
     height: 180px;
     position: absolute;
     bottom : 4%;
@@ -321,6 +321,26 @@ body{
     font-style: normal;
     border-radius: 20px;
 
+}
+
+.readbook-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    display : none;
+    border-radius: 10px;
+    border : black solid;
+    padding: 40px 20px 20px 20px;
+    width : 30%;
+    height: 80%;
+    position : absolute;
+    top : 10%;
+    left : 35%;
+    right : 35%;
+    color : white;
+    font-family: "Thasadith", sans-serif;
+    font-size: 14px;
+    font-weight: 550;
+    font-style: italic;
 }
 
 .story-text{
@@ -407,7 +427,7 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    background-size: cover;
+    background-size: contain;
     position: fixed;
     background-color: #222;
     top: 0;
