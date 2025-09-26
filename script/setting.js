@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const musicVolume = localStorage.getItem('musicVolume') || 70;
     const voiceVolume = localStorage.getItem('voiceVolume') || 80;
     const sfxVolume = localStorage.getItem('sfxVolume') || 60;
+    const alertBackgound = this.getElementById('alert-background');
+    const restoreAlert = this.getElementById('restore-alert');
+    const saveAlert = this.getElementById('save-alert');
 
     document.getElementById('text-speed').value = textSpeed;
     document.getElementById('text-speed-value').textContent = textSpeed;
@@ -18,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('sfx-volume').value = sfxVolume;
     document.getElementById('sfx-volume-value').textContent = sfxVolume + '%';
 
-    function closeSettings() { window.history.back(); }
+    function closeSettings() { 
+        window.history.back();
+    }
     cancelBtn.addEventListener('click', closeSettings);
 
     function updateTextPreview() {
@@ -63,8 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('musicVolume', document.getElementById('music-volume').value);
         localStorage.setItem('voiceVolume', document.getElementById('voice-volume').value);
         localStorage.setItem('sfxVolume', document.getElementById('sfx-volume').value);
-        alert('Settings saved successfully!');
-        closeSettings();
+        alertBackgound.style.display = "flex";
+        restoreAlert.style.display = "none";
+        saveAlert.style.display = "flex";
     });
 
     defaultsBtn.addEventListener('click', function() {
@@ -79,7 +85,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('sfx-volume-value').textContent = '60%';
         updateTextPreview();
         updateTextDemo();
-        alert('Default settings restored!');
+        alertBackgound.style.display = "flex";
+        restoreAlert.style.display = "flex";
+        saveAlert.style.display = "none";
+    });
+
+    alertBackgound.addEventListener("click",() =>{
+        if (saveAlert.style.display == "flex"){
+            closeSettings();
+        }else{
+        alertBackgound.style.display = "none";
+        restoreAlert.style.display = "none";
+        saveAlert.style.display = "none";
+        }
     });
 
     document.getElementById('text-speed').addEventListener('input', updateTextDemo);

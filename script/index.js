@@ -2,8 +2,6 @@ const startBtn = document.getElementById("start-btn");
 const settingBtn = document.getElementById("setting-btn");
 const quitBtn = document.getElementById("quit-btn");
 
-
-
 startBtn.addEventListener("click", () =>{
     window.location.href = "story.html";
 })
