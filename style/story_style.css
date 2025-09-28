@@ -118,16 +118,19 @@ body{
     border : black solid;
     padding: 40px 20px 20px 20px;
     width : 30%;
-    height: 80%;
+    height: 70%;
     position : absolute;
-    top : 10%;
-    left : 35%;
-    right : 35%;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
     color : white;
     font-family: "Thasadith", sans-serif;
     font-size: 14px;
     font-weight: 550;
     font-style: italic;
+    box-shadow:
+        0 0 5px #ff0400,
+        0 0 10px #ff0400;
 }
 
 .exit-text-btn{
@@ -161,10 +164,10 @@ body{
     width : 20%;
     height: 40%;
     position : absolute;
-    top : 30%;
+    top : 50%;
     bottom : 30%;
-    left : 40%;
-    right : 40%;
+    left : 50%;
+    transform: translate(-50%, -50%);
 }
 
 .resume-btn{
@@ -331,11 +334,11 @@ body{
     border : black solid;
     padding: 40px 20px 20px 20px;
     width : 30%;
-    height: 80%;
+    height: 70%;
     position : absolute;
-    top : 10%;
-    left : 35%;
-    right : 35%;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%,-50%);
     color : white;
     font-family: "Thasadith", sans-serif;
     font-size: 14px;
@@ -348,6 +351,7 @@ body{
     line-height: 2;
     text-align: left;
     overflow-y: auto;
+    user-select: none;
 }
 
 .conti-text{

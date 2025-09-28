@@ -556,7 +556,12 @@ readBtn.addEventListener("click",() =>{
     allTextBox.style.display = "flex";
 });
 
-allTextBox.addEventListener("click",() =>{
+exitTextBtn.addEventListener("click",() =>{
+    background.style.display = "none";
+    allTextBox.style.display = "none";
+});
+
+background.addEventListener("click",() =>{
     background.style.display = "none";
     allTextBox.style.display = "none";
 });
