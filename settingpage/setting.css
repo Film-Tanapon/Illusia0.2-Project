@@ -17,6 +17,7 @@ body {
     margin: 0;
     padding: 20px;
     font-family: "Baskervville", serif;
+    user-select: none; /* ป้องกันการคลุมข้อความ */
 }
 
 .settings-container {
@@ -111,6 +112,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: white;
+    user-select: none; /* ป้องกันการคลุมข้อความ */
 }
 
 .settings-buttons {
@@ -129,6 +131,7 @@ body {
     cursor: pointer;
     font-family: "Baskervville", serif;
     transition: all 0.3s;
+    user-select: none; /* ป้องกันการคลุมข้อความ */
 }
 
 .settings-btn:hover {

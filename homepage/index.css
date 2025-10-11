@@ -2,6 +2,7 @@
 * {
     cursor: url("../picture/Illusia_cursor.cur"), auto;
 }
+
 body{
     background-image : url("../picture/Index_image.jpg");
     background-repeat: no-repeat;
@@ -15,34 +16,91 @@ body{
     min-height: 100vh;
     margin: 0;
     background-color: black;
+    overflow: hidden;
+}
+
+.login-container{
+    position: absolute;  /* เปลี่ยนจาก flex → absolute */
+    top: 50px;
+    right: 10%;
+    border-radius: 15px;
+    display: inline-block;   /* ขนาดพอดีกับข้อความข้างใน */
+    width: fit-content;      /* ใช้ขนาดตามเนื้อหา */
+    height: fit-content;
+    background-color: rgba(30, 0, 0, 0.7);
+    border: 2px solid #800000;
+    user-select: none; /* ป้องกันการคลุมข้อความ */
+}
+
+.login {  
+    padding: 10px 20px 10px 20px;
+    z-index: 100;
+    color: #FFFFFF;
+    font-size: 25px;      
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.login:hover {
+    color: #FF0400;
+    text-shadow:
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff6600;
+}
+
+.btn-container{
+    position: absolute;
+    display: flex;
+    width: 35%;
+    height: 100vh;
+    right: 11%;
+}
+
+#load-btn{
+    display: none;
+    top:45%;
 }
 
 #start-btn{
-    margin-top : 20vw;
+    top:50%;
 }
+
+#setting-btn{
+    top:62.5%;
+}
+
+#quit-btn{
+    top:75%;
+}
+
 .btn{
+    position: absolute;
     display:block;
+    white-space: nowrap;
     background-color: rgba(30, 0, 0, 0.7);
     border-radius: 10px;
     padding: clamp(8px, 1.5vw, 20px) clamp(20px, 2vw, 40px);
     border: 2px solid #800000;
     color: black;
-    min-width: clamp(100px, 15vw, 300px);
-    margin-right: 22.5%;
+    width: 50%;
+    margin-right: 25%;
     margin-bottom: 25px;
-    font-size: clamp(18px, 4vw, 32px);
+    font-size: 250%;
     font-family: "Baskervville", serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
     letter-spacing: 2px;
+    left :50%;
+    transform: translateX(-50%);
     text-shadow: 
         0 0 5px #ff0000,
         0 0 10px #ff0000,
         0 0 20px #ff3333;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    user-select: none; /* ป้องกันการคลุมข้อความ */
 }
-
 
 .btn:hover{
     background-color: rgba(50, 0, 0, 0.9);
@@ -56,56 +114,12 @@ body{
         0 0 10px #ff0400,
         0 0 20px #ff0400,
         0 0 40px #ff0000;
-    transform: scale(1.05) rotate(-5deg);
-}
-
-.alert-background{
-    display:none;
-    position:fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.save-alert{
-    display:none;
-    position: absolute;
-    background-color: rgba(30, 0, 0, 0.7);
-    border: 2px solid #800000;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    color: rgb(255, 255, 255);
-    width : 10%;
-    height: 4%;
-    top : 48%;
-    left : 50%;
-    transform: translateX(-50%);
-    display: flex;
-    padding: 15px 30px;
-    font-weight: bold;
-    text-align: center;
-    white-space: normal;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    font-family: "Baskervville", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: inherit;
-    font-size: 14px;
-    text-shadow: 
-        0 0 5px #ff0000,
-        0 0 10px #ff0000,
-        0 0 20px #ff3333;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
 .bx-check{
     font-size: 20px;
     margin-left: 10px;
-    color:#00FF30;
+    color:#000000;
     text-shadow: 
         0 0 5px #00FF83,
         0 0 10px #00FF83,

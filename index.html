@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illusia</title>
-    <link rel="stylesheet" href="style\main_style.css">
+    <link rel="stylesheet" href="homepage\index.css">
 </head>
 <body>
-    <button class = "btn" id = "start-btn">Start</button>
-    <button class = "btn" id = "setting-btn">Setting</button>
-    <button class = "btn" id = "quit-btn">Quit</button>
+    <div class = "btn-container" id = "btn-container">
+        <button class = "btn" id = "load-btn">Load Game</button>
+        <button class = "btn" id = "start-btn">Start</button>
+        <button class = "btn" id = "setting-btn">Setting</button>
+        <button class = "btn" id = "quit-btn">Quit</button>
+    </div>
     
-    <script src = "script\index.js"></script>
+    <div  class = "login-container" id = "login-container">
+        <a href="loginpage\login.html" class="login" id="login">Login</a>
+    </div>
+    
+    <script src = "homepage\index.js"></script>
 </body>
 </html>

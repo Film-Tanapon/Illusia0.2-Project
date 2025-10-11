@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illusia - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="login-container" id="login-container">
+        <a href="..\index.html" class="close-login">
+            <i class='bx bx-x'></i>
+        </a>
+        <h1 class="login-header">Login</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <input type="text" id="username" placeholder=" " required>
+                <label for="username">Username</label>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">Password</label>
+                <i class='bx  bx-eye-closed close-password' id = "close-password"></i> 
+                <i class='bx  bx-eye open-password' id = "open-password" ></i> 
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <p class="register-messege">Don't have an account yet? <a href="../registerpage/register.html">Register Now.</a>
+        </p>
+    </div>
+
+    <div class="alert-background" id="alert-background">
+        <div class="login-success-alert alert-box" id="login-success-alert" style="display: none;">
+            Login Successful!<i class='bx bx-check'></i>
+        </div>
+        <div class="login-fail-alert alert-box" id="login-fail-alert" style="display: none;">
+            Invalid username or password.<i class='bx bx-x'></i>
+        </div>
+    </div>
+    <div class="close-link-container"></div>
+
+
+    <script src="login.js"></script>
+</body>
+
+</html>

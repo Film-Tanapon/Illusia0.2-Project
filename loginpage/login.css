@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap');
+*{
+    cursor : url("../picture/Illusia_cursor.cur"), auto;
+}
+body {
+    background-color: black;
+    background-image : url("../picture/Index_image.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: "Baskervville", serif;
+    overflow: hidden;
+}
+
+.login-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #ff0400;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 25px rgba(255, 4, 0, 0.6);
+}
+
+.login-header {
+    color: #ff0400;
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(255, 4, 0, 0.5);
+    user-select: none;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.form-group input {
+  width: 95%;
+  padding: 12px 15px 12px 15px;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ff0400;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-group label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 14px;
+  color: #ff0400;
+  background: rgba(0,0,0,0.0);
+  padding: 0 5px;
+}
+
+.form-control { 
+    color: #ffffff; 
+    background-color: rgba(255, 255, 255, 0.05); 
+    border: 1px solid #ff0400; 
+    padding: 12px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-btn {
+    position: relative;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 20px;
+    border-color: #ff0400;
+    padding: 12px 25px;
+    color: #ff0400;
+    font-size: 20px;
+    font-family: "Baskervville", serif;
+    font-weight: 700;
+    font-style: normal;
+    transition: all 0.3s;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.login-btn:hover {
+    background-color: rgba(50, 0, 0, 0.9);
+    color: #ff0000;
+    text-shadow:
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff6600;
+    box-shadow:
+        0 0 5px #ff0400,
+        0 0 10px #ff0400,
+        0 0 20px #ff0400,
+        0 0 40px #ff0000;
+}
+
+
+.register-messege {
+    font-family: "Baskervville", serif;
+    font-size: 20px;
+    color: #ffffff;
+    user-select: none;
+}
+
+.close-login{
+    position: absolute; 
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    font-size: 30px;
+    color: #FFF;          
+    text-decoration: none;       
+    transition: color 0.2s;
+}
+
+.close-login:hover {
+    color: #FF0400; 
+    text-shadow:
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff6600;
+}
+
+.alert-background{
+    display:none;
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.login-success-alert,
+.login-fail-alert {
+    display:none;
+    position: absolute;
+    background-color: rgba(30, 0, 0, 0.7);
+    border: 2px solid #800000;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    width : 10%;
+    height: 4%;
+    top : 48%;
+    left : 50%;
+    transform: translateX(-50%);
+    display: flex;
+    padding: 15px 30px;
+    font-weight: bold;
+    text-align: center;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    font-family: "Baskervville", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: inherit;
+    font-size: 14px;
+    text-shadow: 
+        0 0 5px #ff0000,
+        0 0 10px #ff0000,
+        0 0 20px #ff3333;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.form-group input[type="password"]:hover,
+.form-group input[type="text"]:hover,
+.login-btn:hover {
+    cursor : url("../picture/Illusia_cursor.cur"), auto !important;
+}
+
+#password + * {
+    cursor : url("../picture/Illusia_cursor.cur"), auto !important;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-reveal {
+    cursor : url("../picture/Illusia_cursor.cur"), auto !important; 
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(20, 0, 0, 0.9) inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.close-password{
+    position:absolute;
+    font-size: 24px;
+    color: white;
+    right: 2%;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+}
+
+.open-password{
+    position:absolute;
+    font-size: 24px;
+    color: white;
+    right: 2%;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+}
+
+#open-password {
+    display: none;
+    top: 50%;
+}
+
+#close-password {
+    display: flex;
+    top: 45%;
+}
+
+.register-messege a {
+    color: #ff0400; 
+    text-decoration: none; 
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 4, 0, 0.5); 
+    transition: color 0.3s;
+}
+
+.register-messege a:hover {
+    color: #ff3333; 
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000;
+}

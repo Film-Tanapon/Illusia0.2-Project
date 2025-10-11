@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('sfx-volume-value').textContent = sfxVolume + '%';
 
     function closeSettings() { 
-        window.history.back();
+        window.location.href = "../index.html";
     }
     cancelBtn.addEventListener('click', closeSettings);
 
@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
         alertBackgound.style.display = "flex";
         restoreAlert.style.display = "none";
         saveAlert.style.display = "flex";
+        setTimeout(() => {
+            closeSettings();
+        }, 1000);
     });
 
     defaultsBtn.addEventListener('click', function() {
@@ -88,16 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
         alertBackgound.style.display = "flex";
         restoreAlert.style.display = "flex";
         saveAlert.style.display = "none";
-    });
 
-    alertBackgound.addEventListener("click",() =>{
-        if (saveAlert.style.display == "flex"){
-            closeSettings();
-        }else{
-        alertBackgound.style.display = "none";
-        restoreAlert.style.display = "none";
-        saveAlert.style.display = "none";
-        }
+        setTimeout(() => {
+            alertBackgound.style.display = "none";
+            restoreAlert.style.display = "none";
+        }, 1000);
     });
 
     document.getElementById('text-speed').addEventListener('input', updateTextDemo);
