@@ -14,7 +14,7 @@ loginForm.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value.trim();
 
   try {
-    const res = await fetch("http://localhost:3000/login", {
+    const res = await fetch("https://illusia-backend.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
@@ -25,7 +25,7 @@ loginForm.addEventListener('submit', async (e) => {
     if (data.success) {
       // ✅ save username ลง LocalStorage
       localStorage.setItem("user_id", data.id);
-      localStorage.setItem("username", data.username);
+      localStorage.setItem("username", data.user.username);
 
       showAlert(successAlert);
 

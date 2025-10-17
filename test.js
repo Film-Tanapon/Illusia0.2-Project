@@ -1,7 +1,7 @@
 const userContainer = document.getElementById("user-container");
 const updateForm = document.getElementById("update-form");
 
-const API_URL = "http://localhost:3000/users";
+const API_URL = "https://illusia-backend.onrender.com/users";
 
 // ฟังก์ชันดึงข้อมูลจาก backend
 function fetchUsers() {
