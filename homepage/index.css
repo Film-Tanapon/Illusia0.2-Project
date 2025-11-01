@@ -1,108 +1,150 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap');
+
 * {
     cursor: url("../picture/Illusia_cursor.cur"), auto;
 }
 
-body{
-    background-image : url("../picture/Index_image.jpg");
+body {
+    /* เปลี่ยน background-size เป็น cover เพื่อให้ภาพเต็มจอเสมอ และไม่เหลือขอบดำ */
+    background-image: url("../picture/Index_image.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
+    /* แก้ไขตรงนี้ */
+
+    /* จัดองค์ประกอบหลักให้อยู่ตรงกลาง (เป็นจุดเริ่มต้นที่ดีสำหรับการจัดวาง) */
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    /* เปลี่ยนเป็น center เพื่อให้เนื้อหาหลัก (ปุ่ม) สามารถจัดกึ่งกลางได้ง่ายขึ้น */
     justify-content: center;
+
     min-height: 100vh;
     margin: 0;
     background-color: black;
     overflow: hidden;
+    /* ยังคงป้องกันการเลื่อน */
 }
 
-.login-container{
-    position: absolute;  /* เปลี่ยนจาก flex → absolute */
-    top: 50px;
-    right: 10%;
+.login-container {
+    position: absolute;
+    /* ใช้หน่วย vw เพื่อให้ตำแหน่งยืดหยุ่นตามความกว้างของหน้าจอ */
+    top: 3vw;
+    right: 3vw;
     border-radius: 15px;
-    display: inline-block;   /* ขนาดพอดีกับข้อความข้างใน */
-    width: fit-content;      /* ใช้ขนาดตามเนื้อหา */
+    width: fit-content;
     height: fit-content;
     background-color: rgba(30, 0, 0, 0.7);
     border: 2px solid #800000;
-    user-select: none; /* ป้องกันการคลุมข้อความ */
+    user-select: none;
+    z-index: 10;
+    /* ให้ Login อยู่ด้านบนสุด */
 }
 
-.login {  
-    padding: 10px 20px 10px 20px;
-    z-index: 100;
+.login {
+    /* ใช้หน่วย vw สำหรับ padding และ font-size เพื่อให้ย่อตามหน้าจอ */
+    padding: 0.8vw 1.5vw;
     color: #FFFFFF;
-    font-size: 25px;      
+    font-size: 1.5vw;
+    font-weight: 500;
+    font-size: clamp(12px, 3.5vw, 24px);
+    /* แก้ไข: ใช้ vw */
     text-decoration: none;
     transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 
 .login:hover {
     color: #FF0400;
+    /* Text-shadow สามารถใช้หน่วย em/rem ได้ หรือคง px ไว้ก็ได้เพราะมีผลแค่ visual */
     text-shadow:
         0 0 10px #ff0000,
         0 0 20px #ff0000,
         0 0 30px #ff6600;
 }
 
-.btn-container{
+.btn-container {
     position: absolute;
     display: flex;
-    width: 35%;
-    height: 100vh;
-    right: 11%;
+    flex-direction: column;
+    /* จัดเรียงปุ่มในแนวตั้ง */
+    /*justify-content: center;*/
+    /* จัดให้อยู่กลางแนวตั้ง */
+    align-items: center;
+    /* จัดปุ่มให้อยู่กลางแนวตั้ง */
+
+    /* กำหนดตำแหน่งยึดด้านขวา และขนาดโดยใช้ vw/vh */
+    width: 30vw;
+    /* ความกว้าง 30% ของ viewport */
+    /*height: 100vh;*/
+    height: auto;
+    right: 12vw;
+    /* ระยะห่างจากขวา 12% ของ viewport */
+    top: 45vh;
+    /* ยึดบน */
+    justify-content: flex-start;
+    z-index: 5;
 }
 
-#load-btn{
+#load-btn {
     display: none;
-    top:45%;
+    margin-bottom: 1.5vh; 
+    margin-top: 0;
 }
 
-#start-btn{
-    top:50%;
+#start-btn {
+    margin-bottom: 1.5vh;
+    margin-top: 0;
 }
 
-#setting-btn{
-    top:62.5%;
+#setting-btn {
+    margin-bottom: 1.5vh;
+    margin-top: 0;
 }
 
-#quit-btn{
-    top:75%;
+#quit-btn {
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
-.btn{
-    position: absolute;
-    display:block;
+.btn {
+    /* ลบ position: absolute; และ left/transform ออก
+       เพื่อให้ .btn-container จัดการตำแหน่งตาม Flexbox */
+    position: static;
+    /* หรือลบบรรทัดนี้ไปเลยก็ได้ */
+    display: block;
     white-space: nowrap;
     background-color: rgba(30, 0, 0, 0.7);
     border-radius: 10px;
+
+    /* การใช้ clamp() เป็นวิธีที่ดีมาก! (ใช้ต่อไป)
+       มันจะทำให้ padding มีค่าต่ำสุด กลาง (vw) และสูงสุด */
     padding: clamp(8px, 1.5vw, 20px) clamp(20px, 2vw, 40px);
     border: 2px solid #800000;
     color: black;
-    width: 50%;
-    margin-right: 25%;
-    margin-bottom: 25px;
-    font-size: 250%;
-    font-family: "Baskervville", serif;
-    font-optical-sizing: auto;
+    width: 90%;
+    /* ความกว้างของปุ่มเทียบกับ .btn-container */
+
+    /* ใช้หน่วย vw/vmin สำหรับ Font-size เพื่อให้ย่อ/ขยายตามหน้าจอ */
+    font-size: clamp(28px, 3.5vw, 40px);
     font-weight: 700;
-    font-style: normal;
-    letter-spacing: 2px;
-    left :50%;
-    transform: translateX(-50%);
-    text-shadow: 
+    font-family: "Baskervville", serif;
+    /* ... สไตล์อื่น ๆ ... */
+
+    /* ลบ margin-right, left, transform ที่กำหนดตำแหน่งตายตัวออก */
+    /*margin: 10px 0;*/
+    /* ใช้ margin เพื่อเว้นช่องว่าง */
+    /* margin: 1.5vh 0; */
+ 
+    text-shadow:
         0 0 5px #ff0000,
         0 0 10px #ff0000,
         0 0 20px #ff3333;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-    user-select: none; /* ป้องกันการคลุมข้อความ */
+    user-select: none;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: rgba(50, 0, 0, 0.9);
     color: #ff0000;
     text-shadow:
@@ -116,13 +158,229 @@ body{
         0 0 40px #ff0000;
 }
 
-.bx-check{
+.bx-check {
     font-size: 20px;
     margin-left: 10px;
-    color:#000000;
-    text-shadow: 
+    color: #000000;
+    text-shadow:
         0 0 5px #00FF83,
         0 0 10px #00FF83,
         0 0 20px #54B69E;
 
 }
+
+.load-game-frame {
+    display: none; /* 👈 ซ่อนไว้ก่อน */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    max-width: 600px;
+    height: 70vh;
+    max-height: 500px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid #800000;
+    border-radius: 10px;
+    z-index: 20; /* ให้อยู่บนสุด */
+    
+    /* ตั้งค่า flex */
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 20px #ff0000;
+    color: white;
+}
+
+/* ปุ่มปิด (X) */
+.close-load-frame {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: white;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+}
+.close-load-frame:hover {
+    color: #ff0000;
+}
+
+/* Title (H2) */
+.load-game-frame h2 {
+    text-align: center;
+    color: #ff0000;
+    font-family: "Baskervville", serif;
+    margin-top: 0;
+}
+
+/* Container ของช่องเซฟ */
+.save-slots-container {
+    overflow-y: auto; /* 👈 ทำให้เลื่อนได้ถ้าช่องเซฟเยอะ */
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* แต่ละช่องเซฟ */
+.save-slot-item {
+    display: flex; /* 👈 ทำให้ข้อมูลและปุ่มลบอยู่ข้างกัน */
+    justify-content: space-between; /* 👈 แยกไปคนละฝั่ง */
+    align-items: center; /* 👈 ให้อยู่กึ่งกลางแนวตั้ง */
+    background-color: rgba(30, 0, 0, 0.7);
+    border: 1px solid #800000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease-in-out;
+    padding: 0; /* 👈 เอา padding ออกจากตัวแม่ */
+}
+
+.save-slot-info {
+    flex: 1; /* 👈 ให้ส่วนนี้กินพื้นที่ส่วนใหญ่ */
+    padding: 15px; /* 👈 ย้าย padding มาไว้ที่นี่ */
+}
+/* (เรายังใช้ .save-slot-item:hover เดิมได้) */
+.save-slot-item:hover {
+    background-color: rgba(80, 0, 0, 0.9);
+    border-color: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.save-slot-delete-btn {
+    background: transparent;
+    border: none;
+    color: #800000; /* 👈 สีแดงเข้ม เพื่อให้ดูเป็นส่วนหนึ่งของดีไซน์ */
+    font-size: 2.2rem; /* 👈 ขนาดใหญ่ขึ้น */
+    padding: 0 20px;
+    transition: all 0.2s ease; /* 👈 Transition สำหรับการเปลี่ยนแปลงทั้งหมด */
+    align-self: stretch;
+    display: flex; /* 👈 ใช้ flexbox เพื่อจัดไอคอนตรงกลาง */
+    align-items: center; /* 👈 จัดไอคอนตรงกลางแนวตั้ง */
+    justify-content: center; /* 👈 จัดไอคอนตรงกลางแนวนอน */
+    cursor: pointer; /* 👈 แสดงว่ากดได้ */
+}
+
+.save-slot-delete-btn:hover {
+    color: #ff0000; /* 👈 สีแดงสดเมื่อชี้ */
+    /* ⭐️ เพิ่มเงาเรืองแสงให้กับปุ่ม */
+    text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000;
+    /* ⭐️ เพิ่มเงา Box Shadow ให้กับกรอบ (ถ้ามี) */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); 
+}
+
+.save-slot-delete-btn i {
+    font-size: 1em; /* 👈 ขนาดไอคอนจะสัมพันธ์กับ font-size ของปุ่มแม่ */
+    line-height: 1; /* ช่วยให้ไอคอนจัดกึ่งกลางได้ดี */
+    vertical-align: middle;
+}
+
+.save-slot-item strong {
+    font-size: 1.2rem;
+    color: #ffaaaa;
+    font-family: "Baskervville", serif;
+}
+
+.save-slot-item p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.save-name-modal-start {
+    display: none; /* 👈 ซ่อนไว้ก่อน */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.95);
+    border: 2px solid #800000;
+    border-radius: 10px;
+    padding: 25px 30px;
+    z-index: 20; /* ให้อยู่บนสุด */
+    box-shadow: 0 0 20px #ff0000;
+    color: white;
+    font-family: "Baskervville", serif;
+}
+
+#save-name-form-start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.save-name-modal-start h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #ff0000;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.save-name-modal-start p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+#save-name-input-start {
+    width: 300px;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #800000;
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* (ใช้ CSS .save-modal-buttons ร่วมกันได้ ถ้าคุณมีอยู่แล้ว) */
+.save-modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.save-modal-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 140px;
+    font-family: "Baskervville", serif;
+    border: 2px solid #800000;
+    background-color: rgba(30, 0, 0, 0.7);
+    color: white;
+}
+
+.save-modal-buttons button:hover {
+    background-color: rgba(80, 0, 0, 0.9);
+    color: #ff0000;
+}
+
+/* ปุ่ม Start (สีพิเศษ) */
+.save-modal-buttons button[type="submit"] {
+    background-color: #800000;
+    color: white;
+}
+.save-modal-buttons button[type="submit"]:hover {
+    background-color: #ff0000;
+}
+
+/* #load-btn {
+    display: none;
+    top: 45%;
+}
+
+#start-btn {
+    top: 50%;
+    ฮึก…… ฮือ…… โฮ... ฮึก... ฮือ …ฮือ ฮึก โฮ …… ฟืดดดดด ฮืออ ฟืดดดดด ฮือ……โฮฮฮ ฮึก ……ฮือออ ฮึก โฮ... .. 
+    ฮึก…… ฮือ…  ฮือ …ฮือ ฮึก โฮ …… ฟืดด ฮึก ……ฮืออออออ ฮึก โฮฮึก…… 5555555555555555555
+}
+
+#setting-btn {
+    top: 62.5%;
+}
+
+#quit-btn {
+    top: 75%;
+} */

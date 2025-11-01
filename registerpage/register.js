@@ -5,11 +5,7 @@ const passwordInput = document.getElementById('password');
 const confirmPasswordInput = document.getElementById('confirm-password');
 const backgroundAlert = document.getElementById('alert-background');
 const successAlert = document.getElementById('success-alert');
-const failFillAlert = document.getElementById('fail-fill-alert');
-const failPasswordAlert = document.getElementById('fail-password-alert');
-const failLenghtAlert = document.getElementById('fail-lenght-alert');
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirm-password');
+const failAlert = document.getElementById('fail-alert');
 const openPassword = document.getElementById('open-password');
 const closePassword = document.getElementById('close-password');
 const openConfirmPassword = document.getElementById('open-confirm-password');
@@ -24,40 +20,42 @@ registerForm.addEventListener('submit', async (e) => {
     const password = passwordInput.value.trim();
     const confirmPassword = confirmPasswordInput.value.trim();
 
+    const showAlert = (message) => {
+        backgroundAlert.style.display = "flex";
+        failAlert.innerHTML = `${message}<i class='bx bx-x'></i>`;
+        failAlert.style.display = "flex";
+
+        setTimeout(() => {
+            backgroundAlert.style.display = "none";
+            failAlert.innerHTML = "";
+            failAlert.style.display = "none";
+        }, 2000); // ยืดเวลาเป็น 2 วิ
+    };
+
     // ✅ ตรวจสอบค่าว่าง
     if (!username || !email || !password || !confirmPassword) {
-        backgroundAlert.style.display = "flex";
-        failFillAlert.style.display = "flex";
-
-        setTimeout(() => {
-            backgroundAlert.style.display = "none";
-            failFillAlert.style.display = "none";
-        }, 3000);
+        showAlert("Please fill in all fields.");
         return;
     }
-
+    
+    // ✅ ตรวจสอบว่า email มี @ กี่ตัว (0, 1, 2, ...)
+    const atCount = email.split('@').length - 1;
+    if (atCount !== 1) {
+        showAlert("Email must contain exactly one '@' symbol.");
+        return;
+    }
+    
     // ✅ ตรวจสอบ password match
     if (password !== confirmPassword) {
-        backgroundAlert.style.display = "flex";
-        failPasswordAlert.style.display = "flex";
-
-        setTimeout(() => {
-            backgroundAlert.style.display = "none";
-            failPasswordAlert.style.display = "none";
-        }, 3000);
-        return;
+        showAlert("Passwords do not match. Please ensure both passwords are the same.");
+        return;
     }
 
-    // ✅ ตรวจสอบความยาวขั้นต่ำ
-    if (password.length < 6) {
-        backgroundAlert.style.display = "flex";
-        failLenghtAlert.style.display = "flex";
-
-        setTimeout(() => {
-            backgroundAlert.style.display = "none";
-            failLenghtAlert.style.display = "none";
-        }, 3000);
-        return;
+    //ตรวจสอบพาสเวิด ความปลอดภัย
+    const passwordRegex = /^(?=.*[A-Z]).{6,}$/; //เป็นการบอกว่าต้องมีพิมพ์ใหญ๋ และความยาวอยู่ที่ 6 ตัวขึ้นไป
+    if (!passwordRegex.test(password)) {
+        showAlert("Password must be at least 6 characters and contain 1 uppercase letter.");
+        return;
     }
 
     try {
@@ -75,15 +73,16 @@ registerForm.addEventListener('submit', async (e) => {
 
             setTimeout(() => {
                 backgroundAlert.style.display = "none";
-                successAlert = "none";
-            }, 3000);
-            window.location.href = "../loginpage/login.html";
+                successAlert.style.display = "none";
+                window.location.href = "../loginpage/login.html";
+            }, 1500);
+            
         } else {
-            alert('Registration failed: ' + (data.error || 'Unknown error'));
+            showAlert('Registration failed: ' + (data.error || 'Username or email may already exist.'));
         }
     } catch (err) {
         console.error(err);
-        alert('An error occurred. Please try again.');
+        showAlert('An error occurred. Please try again.');
     }
     
 });
@@ -91,23 +90,23 @@ registerForm.addEventListener('submit', async (e) => {
 openPassword.addEventListener('click', ()=>{
     closePassword.style.display = "flex";
     openPassword.style.display = "none";
-    password.type = "password";
+    passwordInput.type = "password";
 })
 
 closePassword.addEventListener('click', ()=>{
     closePassword.style.display = "none";
     openPassword.style.display = "flex";
-    password.type = "text";
+    passwordInput.type = "text";
 })
 
 openConfirmPassword.addEventListener('click', ()=>{
     closeConfirmPassword.style.display = "flex";
     openConfirmPassword.style.display = "none";
-    confirmPassword.type = "password";
+    confirmPasswordInput.type = "password";
 })
 
 closeConfirmPassword.addEventListener('click', ()=>{
     closeConfirmPassword.style.display = "none";
     openConfirmPassword.style.display = "flex";
-    confirmPassword.type = "text";
+    confirmPasswordInput.type = "text";
 })

@@ -3,21 +3,29 @@
     cursor : url("../picture/Illusia_cursor.cur"), auto;
 }
 body {
-  background-color: black;
-  background-image : url("../picture/Index_image.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: contain;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-  padding: 20px;
-  font-family: "Baskervville", serif;
-  overflow: hidden;
+    background-color: black;
+    background-image: url("../picture/Index_image.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    /* เปลี่ยนจาก contain เป็น cover เพื่อให้ภาพเต็มจอเสมอ */
+    background-size: cover; 
+    
+    /* 2. การตั้งค่าการจัดวาง (Flexbox/Layout) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* คงค่า center เพื่อให้เนื้อหาหลัก (ปุ่ม/ลิงก์) อยู่ตรงกลางแนวตั้ง */
+    justify-content: center; 
+
+    /* 3. การตั้งค่าขนาดและขอบ (Sizing/Spacing) */
+    min-height: 100vh;
+    margin: 0;
+    
+    /* 4. การตั้งค่าอื่นๆ */
+    padding: 20px; /* ยังคง padding เดิมไว้ หากต้องการ */
+    font-family: "Baskervville", serif;
+    overflow: hidden;
 }
 
 .back{
@@ -167,30 +175,36 @@ input:-webkit-autofill {
 
 .alert{
     display:none;
+    /* ⭐️ ลบ: position: absolute; และ top/left/transform ออก (จะย้ายไปที่ .alert-background) */
+    /* ถ้าคุณยังต้องการให้ Alert จัดกึ่งกลางด้วยวิธีเดิม ให้คง position: absolute; และ top/left/transform ไว้ */
     position: absolute;
+    top : 48%;
+    left : 50%;
+    transform: translate(-50%, -50%); /* ⭐️ แก้ transform ให้จัดกึ่งกลางแนวตั้งด้วย */
+
     background-color: rgba(30, 0, 0, 0.7);
     border: 2px solid #800000;
     border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    color: rgb(255, 255, 255);
-    width : 10%;
-    height: 4%;
-    top : 48%;
-    left : 50%;
-    transform: translateX(-50%);
+    
+    /* ⭐️ โค้ดสำหรับขนาดที่ยืดหยุ่น ⭐️ */
+    min-width: 280px; /* ขนาดเล็กสุดที่ยอมรับได้ */
+    max-width: 450px; /* ขนาดใหญ่สุดที่ยอมรับได้ (สำหรับจอใหญ่) */
+
+    /* ⭐️ โค้ดสำหรับจัดเรียงข้อความให้เป็นระเบียบ ⭐️ */
     display: flex;
+    flex-direction: column; /* 👈 บังคับให้เรียงแนวตั้ง (ข้อความบน, ไอคอนล่าง) */
+    align-items: center; /* จัดกึ่งกลางองค์ประกอบย่อย */
+    justify-content: center;
+    
+    color: rgb(255, 255, 255);
     padding: 15px 30px;
     font-weight: bold;
     text-align: center;
     white-space: normal;
-    word-break: keep-all;
     overflow-wrap: break-word;
     font-family: "Baskervville", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: inherit;
-    font-size: 14px;
+    font-size: 1.2rem; /* 👈 ปรับให้ตัวอักษรใหญ่ขึ้น */
+
     text-shadow: 
         0 0 5px #ff0000,
         0 0 10px #ff0000,
@@ -206,7 +220,6 @@ input:-webkit-autofill {
         0 0 5px #00FF83,
         0 0 10px #00FF83,
         0 0 20px #54B69E;
-
 }
 
 .bx-x{

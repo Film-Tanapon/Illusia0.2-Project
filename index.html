@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illusia</title>
     <link rel="stylesheet" href="homepage\index.css">
+    
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class = "btn-container" id = "btn-container">
@@ -13,11 +15,26 @@
         <button class = "btn" id = "setting-btn">Setting</button>
         <button class = "btn" id = "quit-btn">Quit</button>
     </div>
-    
-    <div  class = "login-container" id = "login-container">
-        <a href="loginpage\login.html" class="login" id="login">Login</a>
+
+    <div class = "login-container" id = "login-container">
+         <a href="loginpage\login.html" class="login" id="login">Login</a>
     </div>
-    
+
+    <div class = "load-game-frame" id = "load-game-frame"></div>
+
+    <div class="save-name-modal-start" id="save-name-modal-start">
+        <form id="save-name-form-start">
+        <h3>Start New Game</h3>
+        <p>ตั้งชื่อไฟล์เซฟของคุณ:</p>
+        <input type="text" id="save-name-input-start" placeholder="การผจญภัยของฉัน..." required />
+        <div class="save-modal-buttons">
+            <button type="submit" id="save-modal-submit-start">Start Game</button>
+            <button type="button" id="save-modal-cancel-start">Cancel</button>
+        </div>
+        </form>
+    </div>
+
     <script src = "homepage\index.js"></script>
+
 </body>
 </html>

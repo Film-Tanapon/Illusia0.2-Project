@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap');
+
+body {
+    /* สีแดงเลือดหมูเข้ม */
+    background-color: #700010 !important; 
+    /* สีข้อความหลักเป็นสีขาวอ่อน */
+    color: #000000 !important; 
+    /* ใช้ฟอนต์ที่อ่านง่าย */
+    font-family: 'Noto Sans Thai', sans-serif; 
+}
+
+/* 2. หัวข้อใหญ่ (H1) */
+body h1 {
+    color: #ffffff !important; /* สีทองสำหรับหัวข้อ ไอควาย มันสีเหลือง */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* 3. กล่องสีขาว (bg-white) - ยังคงเป็นสีขาว */
+.bg-white {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. ข้อความภายในกล่องสีขาว (h2, h3, label) */
+body > div > div.bg-white h2, 
+body > div > div.bg-white h3,
+body > div > div.bg-white label {
+    color: #333333 !important; /* สีเทาเข้ม */
+}
+
+/* 5. สไตล์ตาราง (Header Row) */
+body thead tr.bg-gray-200 {
+    background-color: #B02828 !important; /* แดงเลือดหมูสว่างขึ้น */
+    color: #ffffff !important; 
+    font-weight: bold;
+}
+
+/* 6. สไตล์ปุ่ม (Override bg-blue-500) */
+button[type="submit"], 
+#export-json {
+    background-color: #B02828 !important; 
+    color: white !important;
+    border: none !important;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover,
+#export-json:hover {
+    background-color: #881e1e !important; 
+}
+
+/* 7. สไตล์ Input/Textarea */
+input.w-full, textarea.w-full {
+    background-color: #ffffff !important; 
+    color: #333333 !important; 
+    border-color: #D0D0D0 !important; /* ขอบสีเทาอ่อน */
+}

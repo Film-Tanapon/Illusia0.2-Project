@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Story Manager</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="story-admin.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">📖 Story Management</h1>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-4" id="form-title">เพิ่มฉากใหม่</h2>
+
+      <form id="story-form" class="grid grid-cols-1 md:grid-cols-2 gap-y-0.5">
+        <input type="hidden" id="edit-scene-id" />
+        
+                <div class="md:col-span-2">           <label class="font-semibold">Scene ID</label>
+          <input id="scene_id" class="w-full p-2 border rounded" required />
+        </div>
+        
+        <div class="md:col-span-2">           <label class="font-semibold">Delay (ms)</label>
+            <input id="delay" type="number" class="w-full p-2 border rounded" placeholder="เช่น 1000" />
+        </div>
+
+        <div class="md:col-span-2">           <label class="font-semibold">Next Scene</label>
+          <input id="next" class="w-full p-2 border rounded" placeholder="ใส่ scene_id ถัดไป (ถ้ามี)" />
+        </div>
+
+        <div class="md:col-span-2">           <label class="font-semibold">Text</label>
+          <textarea id="text" rows="3" class="w-full p-2 border rounded"></textarea>
+        </div>
+
+        <div class="md:col-span-2">           <label class="font-semibold">Diary Text</label>
+          <textarea id="diarytext" rows="2" class="w-full p-2 border rounded" placeholder="ข้อความสำหรับไดอารี่ (ถ้ามี)"></textarea>
+        </div>
+
+        <div class="md:col-span-2">           <label class="font-semibold">Background</label>
+          <input id="background" class="w-full p-2 border rounded" />
+        </div>
+        
+                <div class="md:col-span-2 mt-6 pt-4 border-t border-gray-200">
+    <h3 class="text-lg font-bold text-gray-700 mb-4">🧍 การจัดการตัวละคร (Character)</h3>
+    
+    <div class="mb-4">
+        <label class="font-semibold">Character (General)</label>
+        <input id="character" class="w-full p-2 border rounded" placeholder="ชื่อตัวละคร (ถ้ามี)" />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="font-semibold">Character (Left)</label>
+            <input id="character_left" class="w-full p-2 border rounded" placeholder="ชื่อตัวละครฝั่งซ้าย" />
+        </div>
+
+        <div>
+            <label class="font-semibold">Character (Right)</label>
+            <input id="character_right" class="w-full p-2 border rounded" placeholder="ชื่อตัวละครฝั่งขวา" />
+        </div>
+    </div>
+</div>
+        <div class="md:col-span-2 mt-6 pt-4 border-t border-gray-200">
+    <h3 class="text-lg font-bold text-gray-700 mb-4">🎯 ตัวเลือกที่ 1 (Choice 1)</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+            <label class="font-semibold">Choice 1 Text</label>
+            <input id="choice1_text" class="w-full p-2 border rounded" placeholder="ข้อความบนปุ่มตัวเลือก" />
+        </div>
+        <div>
+            <label class="font-semibold">Choice 1 Next</label>
+            <input id="choice1_next" class="w-full p-2 border rounded" placeholder="Scene ID ถัดไปเมื่อเลือก" />
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="font-semibold">Choice 1 Pos Top</label>
+            <input id="choice_position_top1" class="w-full p-2 border rounded" placeholder="เช่น 50% หรือ 300px" />
+        </div>
+        <div>
+            <label class="font-semibold">Choice 1 Pos Left</label>
+            <input id="choice_position_left1" class="w-full p-2 border rounded" placeholder="เช่น 50% หรือ 200px" />
+        </div>
+    </div>
+    
+</div>
+
+        <div class="md:col-span-2 mt-6 pt-4 border-t border-gray-200">
+    <h3 class="text-lg font-bold text-gray-700 mb-4">🎯 ตัวเลือกที่ 2 (Choice 2)</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+            <label class="font-semibold">Choice 2 Text</label>
+            <input id="choice2_text" class="w-full p-2 border rounded" placeholder="ข้อความบนปุ่มตัวเลือก" />
+        </div>
+        <div>
+            <label class="font-semibold">Choice 2 Next</label>
+            <input id="choice2_next" class="w-full p-2 border rounded" placeholder="Scene ID ถัดไปเมื่อเลือก" />
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="font-semibold">Choice 2 Pos Top</label>
+            <input id="choice_position_top2" class="w-full p-2 border rounded" placeholder="เช่น 60% หรือ 400px" />
+        </div>
+        <div>
+            <label class="font-semibold">Choice 2 Pos Left</label>
+            <input id="choice_position_left2" class="w-full p-2 border rounded" placeholder="เช่น 50% หรือ 200px" />
+        </div>
+    </div>
+
+</div>
+
+        <div class="md:col-span-2 flex gap-4 mt-8">
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">💾 บันทึก</button>
+          <button type="button" id="cancel-edit" class="hidden bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">ยกเลิกแก้ไข</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4">📜 รายการฉากทั้งหมด</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300 text-sm">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border p-2">Scene ID</th>
+              <th class="border p-2">BackGround</th>
+              <th class="border p-2">Next</th>
+              <th class="border p-2">Left</th>
+              <th class="border p-2">Right</th>
+              <th class="border p-2">Text</th>
+              <th class="border p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody id="story-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="story-admin.js"></script>
+</body>
+</html>

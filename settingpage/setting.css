@@ -4,19 +4,28 @@
 }
 body {
     background-color: black;
-    background-image : url("../picture/Index_image.jpg");
+    background-image: url("../picture/Index_image.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    background-size: contain;
+    /* เปลี่ยนจาก contain เป็น cover เพื่อให้ภาพเต็มจอเสมอ */
+    background-size: cover; 
+    
+    /* 2. การตั้งค่าการจัดวาง (Flexbox/Layout) */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* คงค่า center เพื่อให้เนื้อหาหลัก (ปุ่ม/ลิงก์) อยู่ตรงกลางแนวตั้ง */
+    justify-content: center; 
+
+    /* 3. การตั้งค่าขนาดและขอบ (Sizing/Spacing) */
     min-height: 100vh;
     margin: 0;
-    padding: 20px;
+    
+    /* 4. การตั้งค่าอื่นๆ */
+    padding: 20px; /* ยังคง padding เดิมไว้ หากต้องการ */
     font-family: "Baskervville", serif;
+    overflow: hidden;
     user-select: none; /* ป้องกันการคลุมข้อความ */
 }
 

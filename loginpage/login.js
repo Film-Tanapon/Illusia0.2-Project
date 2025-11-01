@@ -24,7 +24,7 @@ loginForm.addEventListener('submit', async (e) => {
 
     if (data.success) {
       // ✅ save username ลง LocalStorage
-      localStorage.setItem("user_id", data.id);
+      localStorage.setItem("user_id", data.user.id);
       localStorage.setItem("username", data.user.username);
 
       showAlert(successAlert);
