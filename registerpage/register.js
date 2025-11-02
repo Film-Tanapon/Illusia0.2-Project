@@ -68,6 +68,9 @@ registerForm.addEventListener('submit', async (e) => {
         const data = await res.json();
 
         if (data.success) {
+            failAlert.style.display = "none"; 
+            failAlert.innerHTML = "";
+
             backgroundAlert.style.display = "flex";
             successAlert.style.display = "flex";
 
