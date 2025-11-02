@@ -244,6 +244,26 @@ async function deleteSaveFile(saveId, slotElement) {
     }
 }
 
+async function wakeUpAPI() {
+    const API_URL = "https://illusia-backend.onrender.com/users";
+    console.log("Attempting to wake up the API...");
+
+    try {
+        const res = await fetch(API_URL);
+        // We only care if the request was successful enough to reach the server (res.ok)
+        // and get some response back, even if it's not a JSON endpoint.
+        if (res.ok) {
+            console.log("API wake-up successful! Status:", res.status);
+        } else {
+             // Handle cases where the server is up but returns an error/unhandled route (e.g., 404)
+            console.warn(`API wake-up request returned a non-ok status: ${res.status}`);
+        }
+    } catch (err) {
+        // Handle network errors (e.g., server is still spinning up or is down)
+        console.error("Failed to wake up API (Network Error or Server Unresponsive):", err.message);
+    }
+}
+
 quitBtn.addEventListener("click", () => {
     window.location.href = "https://www.google.com";
 });
@@ -258,6 +278,8 @@ loadBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("load", () => {
+    wakeUpAPI();
+
     if (username) {
         loginText.textContent = username;
         loadBtn.style.display = "block";

@@ -456,9 +456,9 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
     position: fixed;
-    background-color: #222;
+    background-color: #000000;
     top: 0;
     left: 0;
     width: 100vw;
