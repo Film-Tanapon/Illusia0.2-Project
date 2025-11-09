@@ -507,7 +507,16 @@ body {
 .preload-bar {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #00ff00, #33cc33);
+    background: linear-gradient(90deg, 
+        #ff0000 0%,     /* แดง */
+        #ff7f00 14%,    /* ส้ม */
+        #ffff00 28%,    /* เหลือง */
+        #00ff00 42%,    /* เขียว */
+        #0000ff 56%,    /* น้ำเงิน */
+        #4b0082 70%,    /* คราม */
+        #9400d3 84%,    /* ม่วง */
+        #ff0000 100%    /* แดงซ้ำที่ปลายเพื่อให้ดูต่อเนื่อง */
+    );
     border-radius: 10px;
     transition: width 0.3s ease;
     box-shadow: 0 0 15px #00ff00;
@@ -516,8 +525,8 @@ body {
 #preload-percent {
     margin-top: 20px;
     font-size: 32px;
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
+    color: #d13aff;
+    text-shadow: 0 0 10px #d13aff;
     user-select: none;
     /* ป้องกันการคลุมข้อความ */
 }
