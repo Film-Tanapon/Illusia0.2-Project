@@ -43,15 +43,24 @@ body {
 }
 
 .login {
+    background: transparent;
+    border: none;
+    text-align: left; /* ทำให้ข้อความชิดซ้าย */
+    width: 100%;
     /* ใช้หน่วย vw สำหรับ padding และ font-size เพื่อให้ย่อตามหน้าจอ */
     padding: 0.8vw 1.5vw;
     color: #FFFFFF;
+    font-family: "Baskervville", serif;
     font-size: 1.5vw;
     font-weight: 500;
     font-size: clamp(12px, 3.5vw, 24px);
     /* แก้ไข: ใช้ vw */
     text-decoration: none;
     transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.dropdown-content{
+    display:none;
 }
 
 .login:hover {
@@ -366,21 +375,24 @@ body {
     background-color: #ff0000;
 }
 
-/* #load-btn {
-    display: none;
-    top: 45%;
+.dropdown-content button {
+    /* 1. รีเซ็ตสไตล์ปุ่มเริ่มต้น */
+    background: transparent;
+    border: none;
+    text-align: left; /* ทำให้ข้อความชิดซ้าย */
+    width: 100%;       /* กว้างเต็มกรอบ dropdown */
+    
+    /* 2. นำสไตล์เดิมของ <a> มาใช้ */
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: clamp(10px, 1.2vw, 18px); 
+    font-family: "Baskervville", serif;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-#start-btn {
-    top: 50%;
-    ฮึก…… ฮือ…… โฮ... ฮึก... ฮือ …ฮือ ฮึก โฮ …… ฟืดดดดด ฮืออ ฟืดดดดด ฮือ……โฮฮฮ ฮึก ……ฮือออ ฮึก โฮ... .. 
-    ฮึก…… ฮือ…  ฮือ …ฮือ ฮึก โฮ …… ฟืดด ฮึก ……ฮืออออออ ฮึก โฮฮึก…… 5555555555555555555
+.dropdown-content button:hover {
+    background-color: rgba(80, 0, 0, 0.9);
+    color: #ff0000;
 }
-
-#setting-btn {
-    top: 62.5%;
-}
-
-#quit-btn {
-    top: 75%;
-} */

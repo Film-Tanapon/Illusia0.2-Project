@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Story</title>
     <link rel="stylesheet" href="story_style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="screen" id="screen">
 
         <button class = "read-btn" id = "read-btn"><i class='bx  bx-align-left'  ></i> </button>
         <button class = "pause-btn" id = "pause-btn"><i class='bx  bx-pause'  ></i> </button>
-        <button class="map-btn" id="map-btn"><i class='bx bx-git-branch'></i></button>
+        <button class="map-btn" id="map-btn"><i class='bx  bx-map'    ></i></i></button>
 
         <div class = "character-box-left" id = "character-box-left"></div>
         <div class = "character-box-right" id = "character-box-right"></div>
 
         <div class = "text-box" id = "text-box">
             <p class = "story-text" id = "story-text"></p>
-            <p class = "conti-text" id = "conti-text">Press Spacebar to Continue...</p>
+            <p class = "conti-text" id = "conti-text">Spacebar...</p>
         </div>
 
         <div class = "readbook-container" id = "readbook-container">
@@ -60,6 +61,8 @@
         <button class="close-map-btn" id="close-map-btn"><i class='bx bx-x'></i></button>
         <div class = "scene-block" id = "scene-block"></div>
     </div>
+    
+    <audio id = "music" src="../sound/sound.mp3"></audio>
     
     <script src="story.js"></script>
 </body>

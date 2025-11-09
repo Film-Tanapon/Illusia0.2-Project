@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelBtn = document.getElementById('cancel-btn');
     const saveBtn = document.getElementById('save-btn');
     const defaultsBtn = document.getElementById('defaults-btn');
-    const textSpeed = localStorage.getItem('textSpeed') || 5;
+    const textSpeed = localStorage.getItem('textSpeed') || 2;
     const textSize = localStorage.getItem('textSize') || 'medium';
     const musicVolume = localStorage.getItem('musicVolume') || 70;
     const voiceVolume = localStorage.getItem('voiceVolume') || 80;
@@ -29,12 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateTextPreview() {
         const size = document.getElementById('text-size').value;
         const preview = document.getElementById('text-preview');
-        preview.style.fontSize = size === 'small' ? '14px' : size === 'medium' ? '16px' : '18px';
+        preview.style.fontSize = size === 'small' ? '16px' : size === 'medium' ? '18px' : '22px';
     }
 
     function updateTextDemo() {
         const speed = parseInt(document.getElementById('text-speed').value);
-        const demo = document.getElementById('text-demo');
         let speedLabel;
 
         switch(speed){
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             default: speedLabel = "Medium";
     }
 
-        demo.textContent = speedLabel + " text speed...";
         document.getElementById('text-speed-value').textContent = speedLabel;
     }
 

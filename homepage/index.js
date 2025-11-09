@@ -2,8 +2,12 @@ const loadBtn = document.getElementById("load-btn");
 const startBtn = document.getElementById("start-btn");
 const settingBtn = document.getElementById("setting-btn");
 const quitBtn = document.getElementById("quit-btn");
-const loginText = document.getElementById("login");
 const loadGameFrame = document.getElementById("load-game-frame");
+
+const login = document.getElementById("login");
+const dropdownContent = document.getElementById("dropdown-content");
+const accountBtn = document.getElementById("account");
+const logoutBtn = document.getElementById("logout");
 
 const saveNameModalStart = document.getElementById("save-name-modal-start");
 const saveNameFormStart = document.getElementById("save-name-form-start");
@@ -14,6 +18,8 @@ const saveModalSubmitStart = document.getElementById("save-modal-submit-start");
 const username = localStorage.getItem('username') || '';
 
 const API_URL = "https://illusia-backend.onrender.com";
+
+let dropdown = "close";
 
 async function createNewSave(saveName) {
     const userId = localStorage.getItem('user_id');
@@ -277,11 +283,44 @@ loadBtn.addEventListener("click", () => {
     fetchAndDisplaySaves();
 });
 
+login.addEventListener("click", () => {
+    if(username){
+        if(dropdown == "show"){
+            dropdownContent.style.display = "none";
+            dropdown = "close";
+        }else{
+            dropdownContent.style.display = "block";
+            dropdown = "show";
+        }
+    }else{
+        window.location.href = "loginpage/login.html";
+    }
+});
+
+accountBtn.addEventListener("click", () => {
+    window.location.href = "loginpage/login.html";
+});
+
+logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('selected_save');
+    window.location.reload();
+});
+
 window.addEventListener("load", () => {
     wakeUpAPI();
 
     if (username) {
-        loginText.textContent = username;
+        login.textContent = username;
+        
+        window.addEventListener("click", (e) => {
+            // เช็คว่าไม่ได้คลิกที่ปุ่ม login หรือภายใน login-container
+            if (!login.contains(e.target) && !dropdownContent.contains(e.target)) {
+                dropdownContent.style.display = "none";
+            }
+        });
+
         loadBtn.style.display = "block";
         loadBtn.style.fontSize = "200%";
         startBtn.style.marginTop = "0";

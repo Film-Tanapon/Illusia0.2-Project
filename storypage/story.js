@@ -30,6 +30,8 @@ const mapFrame = document.getElementById("map-frame");
 const mapContainer = document.getElementById("scene-block");
 const closeMapBtn = document.getElementById("close-map-btn");
 
+const music = document.getElementById("music");
+
 let sceneHistory = [];
 let gameVariables = {};
 let currentScene = "scene_1";
@@ -167,6 +169,12 @@ function loadScene(scene, skipHistoryPush = false) {
             mapBtn.style.display = "flex";
 
             advanceLock = false;
+
+            if (skipHistoryPush) {
+                hasFinishedTyping = true; 
+            }
+
+            advanceLock = false;
             typeWriter(sceneData.text, () => {
                 contiText.style.display = "flex";
             });
@@ -229,6 +237,30 @@ function fullText(text) {
         hasFinishedTyping = true;
     }
     contiText.style.display = "flex";
+}
+
+function rebuildTextLog() {
+    console.log("Rebuilding text log from history...");
+    allText.innerHTML = ""; // เคลียร์ log เก่า (ถ้ามี)
+
+    //ไม่เอาฉากท้ายสุด
+    const historyToLog = sceneHistory.slice(0, -1);
+
+    // 1. วนลูปตามประวัติฉากที่เล่นมาทั้งหมด
+    for (const sceneId of historyToLog) {
+        const sceneData = story[sceneId];
+
+        // 2. เช็กว่าฉากนี้มี 'text' หรือไม่
+        if (sceneData && sceneData.text) {
+            
+            // 3. (สำคัญ) เพิ่มข้อความลงใน 'allText'
+            // เราใช้ .replace() เพื่อจัดรูปแบบ \n ให้เป็น <br>
+            // เหมือนกับที่ทำในฟังก์ชัน fullText
+            const formattedText = sceneData.text.replace(/\n/g, "<br>").replace(/\\n/g, "<br>");
+            allText.innerHTML += formattedText + "<br><br>";
+        }   
+    }
+    console.log("✅ Text log rebuilt.");
 }
 
 function choiceSetup(sceneData) {
@@ -550,9 +582,27 @@ closeMapBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("load", async () => {
+    let textsize = localStorage.getItem("textSize") || 'medium';
+
+    if(textsize === 'small'){
+        storyText.style.fontSize = '16px';
+    }else if(textsize === 'large'){
+        storyText.style.fontSize = '22px';
+    }else{
+        storyText.style.fontSize = '18px';
+    }
+    
     const saveLoaded = checkAndLoadSave();
     await loadStoryFromBackend();
+
+    if (saveLoaded) {
+        rebuildTextLog();
+    }
+    
     preloadAllImages(story, () => {
         loadScene(currentScene, saveLoaded);
     });
+    const savedMusicVolume = localStorage.getItem('musicVolume') || 70;
+    music.volume = savedMusicVolume / 100;
+    music.play();
 });
