@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const textSpeed = localStorage.getItem('textSpeed') || 2;
     const textSize = localStorage.getItem('textSize') || 'medium';
     const musicVolume = localStorage.getItem('musicVolume') || 70;
-    const voiceVolume = localStorage.getItem('voiceVolume') || 80;
     const sfxVolume = localStorage.getItem('sfxVolume') || 60;
     const alertBackgound = this.getElementById('alert-background');
     const restoreAlert = this.getElementById('restore-alert');
@@ -16,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('text-size').value = textSize;
     document.getElementById('music-volume').value = musicVolume;
     document.getElementById('music-volume-value').textContent = musicVolume + '%';
-    document.getElementById('voice-volume').value = voiceVolume;
-    document.getElementById('voice-volume-value').textContent = voiceVolume + '%';
     document.getElementById('sfx-volume').value = sfxVolume;
     document.getElementById('sfx-volume-value').textContent = sfxVolume + '%';
 
@@ -57,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-
     document.getElementById('text-size').addEventListener('change', updateTextPreview);
 
     saveBtn.addEventListener('click', function() {
@@ -80,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('text-size').value = 'medium';
         document.getElementById('music-volume').value = 70;
         document.getElementById('music-volume-value').textContent = '70%';
-        document.getElementById('voice-volume').value = 80;
-        document.getElementById('voice-volume-value').textContent = '80%';
         document.getElementById('sfx-volume').value = 60;
         document.getElementById('sfx-volume-value').textContent = '60%';
         updateTextPreview();

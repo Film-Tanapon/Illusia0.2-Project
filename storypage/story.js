@@ -598,11 +598,11 @@ window.addEventListener("load", async () => {
     if (saveLoaded) {
         rebuildTextLog();
     }
-    
-    preloadAllImages(story, () => {
-        loadScene(currentScene, saveLoaded);
-    });
     const savedMusicVolume = localStorage.getItem('musicVolume') || 70;
     music.volume = savedMusicVolume / 100;
-    music.play();
+
+    preloadAllImages(story, () => {
+        loadScene(currentScene, saveLoaded);
+        music.play();
+    });
 });
