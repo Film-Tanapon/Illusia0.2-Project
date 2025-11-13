@@ -60,14 +60,13 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('textSpeed', document.getElementById('text-speed').value);
         localStorage.setItem('textSize', document.getElementById('text-size').value);
         localStorage.setItem('musicVolume', document.getElementById('music-volume').value);
-        localStorage.setItem('voiceVolume', document.getElementById('voice-volume').value);
         localStorage.setItem('sfxVolume', document.getElementById('sfx-volume').value);
         alertBackgound.style.display = "flex";
         restoreAlert.style.display = "none";
         saveAlert.style.display = "flex";
         setTimeout(() => {
             closeSettings();
-        }, 1000);
+        }, 1500);
     });
 
     defaultsBtn.addEventListener('click', function() {
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             alertBackgound.style.display = "none";
             restoreAlert.style.display = "none";
-        }, 1000);
+        }, 1500);
     });
 
     document.getElementById('text-speed').addEventListener('input', updateTextDemo);

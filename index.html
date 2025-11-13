@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illusia</title>
     <link rel="stylesheet" href="homepage\index.css">
-    
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class = "btn-container" id = "btn-container">
@@ -20,15 +20,21 @@
          <button class="login" id="login">Login</button>
 
          <div class="dropdown-content" id="dropdown-content">
-            <button class = "account" id = "account">Account</button>
             <button class = "logout" id="logout">Logout</button>
         </div>
     </div>
 
     <div class = "load-game-frame" id = "load-game-frame"></div>
-    </body>
 
     <div class = "load-game-frame" id = "load-game-frame"></div>
+
+    <div class = "delete-container" id = "delete-container">
+        <p class = "delete-text" id = "delete-text">You want to delete this save?</p>
+        <div class="delete-buttons-group">
+            <button class = "cancel-del" id = "cancel-del">Cancel</button>
+            <button class = "confirm-del" id = "confirm-del"><i class="bx bx-trash"></i></button>
+        </div>
+    </div>
 
     <div class="save-name-modal-start" id="save-name-modal-start">
         <form id="save-name-form-start">

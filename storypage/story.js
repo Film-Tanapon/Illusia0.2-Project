@@ -533,6 +533,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 readBtn.addEventListener("click", () => {
+    music.pause();
     background.style.display = "flex";
     allTextBox.style.display = "flex";
 });
@@ -543,20 +544,24 @@ exitTextBtn.addEventListener("click", () => {
 });
 
 background.addEventListener("click", () => {
+    music.play();
     background.style.display = "none";
     allTextBox.style.display = "none";
+    pauseMenu.style.display = "none";
 });
 
 pauseBtn.addEventListener("click", () => {
+    music.pause();
     background.style.display = "flex";
     pauseMenu.style.display = "flex";
 });
 
 mapBtn.addEventListener("click", () => {
-
+    music.pause();
 });
 
 resumeBtn.addEventListener("click", () => {
+    music.play();
     background.style.display = "none";
     pauseMenu.style.display = "none";
 });
@@ -578,7 +583,12 @@ mapBtn.addEventListener("click", () => {
 
 // เพิ่มปุ่มปิด Map
 closeMapBtn.addEventListener("click", () => {
+    music.play();
     mapFrame.style.display = "none";
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.cursor = "wait";
 });
 
 window.addEventListener("load", async () => {
@@ -603,6 +613,7 @@ window.addEventListener("load", async () => {
 
     preloadAllImages(story, () => {
         loadScene(currentScene, saveLoaded);
+        document.body.style.cursor = "url('../picture/Illusia_cursor.cur'), auto";
         music.play();
     });
 });

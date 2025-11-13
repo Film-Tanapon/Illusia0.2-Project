@@ -16,31 +16,36 @@
         <h1 class = "register-header">Register</h1>
         <form id="register-form"> 
             <div class="form-group">
-                <input type="text" id="username" placeholder=" " required>
+                <input type="text" id="username" placeholder=" ">
                 <label for="username">Username</label>
             </div> 
+            <p class = "error" id = "username-error"><i class='bx bx-x'></i></p>
             <div class="form-group"> 
-                <input type="text" id="email" placeholder=" " required>
+                <input type="text" id="email" placeholder=" ">
                 <label for="email">Email</label>
             </div>
+            <p class = "error" id = "email-error"><i class='bx bx-x'></i></p>
             <div class="form-group">
-                <input type="password" id="password" placeholder=" " required>
+                <input type="password" id="password" placeholder=" ">
                 <label for="password">Password</label>
                 <i class='bx  bx-eye-closed close-password' id = "close-password"></i> 
                 <i class='bx  bx-eye open-password' id = "open-password" ></i> 
             </div>
+            <p class = "error" id = "password-error"><i class='bx bx-x'></i></p>
             <div class="form-group">
-                <input type="password" id="confirm-password" placeholder=" " required>
-                <label for="confirm-password">Comfirm Password</label>
+                <input type="password" id="confirm-password" placeholder=" ">
+                <label for="confirm-password">Confirm Password</label>
                 <i class='bx  bx-eye-closed close-confirm-password' id = "close-confirm-password"></i> 
                 <i class='bx  bx-eye open-confirm-password' id = "open-confirm-password" ></i> 
             </div>
+            <p class = "error" id = "confirm-password-error"><i class='bx bx-x'></i>Passwords do not match. Please ensure both passwords are the same.</p>
+            <p class = "password-note" id = "password-note">*Password must be at least 6 characters and contain 1 uppercase letter.</p>
             <button class = "register-btn" id = "register-btn">Confirm</button>
         </form>   
     </div>
 
     <div class = "alert-background" id = "alert-background">
-        <div class = "success-alert alert" id="success-alert">Registered successfully!<i class='bx  bx-check'  ></i> </div>
+        <div class = "success-alert alert" id="success-alert">Registered successfully! <i class='bx  bx-check'  ></i> </div>
         <div class = "fail-alert alert" id="fail-alert"><i class='bx bx-x'></i></div>
     </div>
     

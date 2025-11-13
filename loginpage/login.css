@@ -51,7 +51,7 @@ body {
 
 .form-group {
   position: relative;
-  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 .form-group input {
@@ -114,6 +114,7 @@ body {
     display: block;
     width: fit-content;
     margin: 0 auto;
+    margin-top: 25px;
 }
 
 .login-btn:hover {
@@ -169,31 +170,32 @@ body {
 
 .login-success-alert,
 .login-fail-alert {
-    display:none;
     position: absolute;
+    top : 48%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+
     background-color: rgba(30, 0, 0, 0.7);
     border: 2px solid #800000;
     border-radius: 10px;
+    
+    min-width: 280px;
+    max-width: 450px;
+
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    
     color: rgb(255, 255, 255);
-    width : 10%;
-    height: 4%;
-    top : 48%;
-    left : 50%;
-    transform: translateX(-50%);
-    display: flex;
     padding: 15px 30px;
     font-weight: bold;
     text-align: center;
     white-space: normal;
-    word-break: keep-all;
     overflow-wrap: break-word;
     font-family: "Baskervville", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: inherit;
-    font-size: 14px;
+    font-size: 1.2rem;
+
     text-shadow: 
         0 0 5px #ff0000,
         0 0 10px #ff0000,
@@ -275,4 +277,35 @@ input:-webkit-autofill {
         0 0 10px #00FF83,
         0 0 20px #54B69E;
 
+}
+
+.error{
+  display: none;
+  color: #ff0400;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 4, 0, 0.5);
+  font-family: "Thasadith", sans-serif;
+  user-select: none;
+  margin-top: 3px;
+}
+
+.error-user{
+  font-size: 15px;
+  color:#ff0000;
+  text-shadow:
+      0 0 5px #ff0000,
+      0 0 10px #ff0000,
+      0 0 20px #ff0000;
+
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important; /* เปลี่ยน #000 เป็นสีพื้นหลังของ Form คุณ */
+  caret-color: white;
+  transition: background-color 5000s ease-in-out 0s;
 }

@@ -6,7 +6,6 @@ const loadGameFrame = document.getElementById("load-game-frame");
 
 const login = document.getElementById("login");
 const dropdownContent = document.getElementById("dropdown-content");
-const accountBtn = document.getElementById("account");
 const logoutBtn = document.getElementById("logout");
 
 const saveNameModalStart = document.getElementById("save-name-modal-start");
@@ -14,6 +13,10 @@ const saveNameFormStart = document.getElementById("save-name-form-start");
 const saveNameInputStart = document.getElementById("save-name-input-start");
 const saveModalCancelStart = document.getElementById("save-modal-cancel-start");
 const saveModalSubmitStart = document.getElementById("save-modal-submit-start");
+
+const deleteContainer = document.getElementById("delete-container");
+const cancelDelete = document.getElementById("cancel-del");
+const confirmDelete = document.getElementById("confirm-del");
 
 const username = localStorage.getItem('username') || '';
 
@@ -118,7 +121,6 @@ function buildSaveSlotsUI(saves) {
     if (saves.length === 0) {
         slotsContainer.innerHTML = "<p>No save files found.</p>";
     } else {
-        // ⭐️ จุดที่แก้ไข: วนลูปสร้างแต่ละช่องเซฟ
         saves.forEach(save => {
             // (1) สร้างกรอบหลักของช่องเซฟ
             const slot = document.createElement("div");
@@ -150,13 +152,17 @@ function buildSaveSlotsUI(saves) {
             // 5. เมื่อคลิก "ปุ่มลบ"
             deleteBtn.addEventListener("click", (e) => {
                 // 🛑 ป้องกันไม่ให้ Event วิ่งทะลุไปที่ infoDiv (กันโหลดเกม)
-                e.stopPropagation(); 
-                
-                // ยืนยันก่อนลบ
-                if (confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบเซฟ "${save.save_name}"?`)) {
-                    // เรียกใช้ฟังก์ชันลบที่เราสร้างไว้
-                    deleteSaveFile(save.id, slot); // ส่ง save.id และตัว slot ไป
-                }
+                e.stopPropagation();
+                deleteContainer.style.display = "flex";
+            });
+
+            confirmDelete.addEventListener("click", () => {
+                deleteSaveFile(save.id, slot); // ส่ง save.id และตัว slot ไป
+                deleteContainer.style.display = "none";
+            });
+
+            cancelDelete.addEventListener("click", () => {
+                deleteContainer.style.display = "none";
             });
 
             // (6) ประกอบร่าง: นำ info และปุ่มลบ ใส่ใน slot
@@ -168,6 +174,8 @@ function buildSaveSlotsUI(saves) {
 
     loadGameFrame.appendChild(slotsContainer);
 }
+
+
 
 
 // 👈 แก้ไข: ทำให้ปุ่ม startBtn เป็น async
@@ -297,15 +305,15 @@ login.addEventListener("click", () => {
     }
 });
 
-accountBtn.addEventListener("click", () => {
-    window.location.href = "loginpage/login.html";
-});
-
 logoutBtn.addEventListener("click", () => {
     localStorage.removeItem('username');
     localStorage.removeItem('user_id');
     localStorage.removeItem('selected_save');
     window.location.reload();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.cursor = "wait";
 });
 
 window.addEventListener("load", () => {
@@ -328,6 +336,7 @@ window.addEventListener("load", () => {
         startBtn.style.fontSize = "200%";
         settingBtn.style.fontSize = "200%";
         quitBtn.style.fontSize = "200%";
+        document.body.style.cursor = "url('../picture/Illusia_cursor.cur'), auto";
     }
 });
 

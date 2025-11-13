@@ -6,12 +6,21 @@ const alertBg = document.getElementById('alert-background');
 const passwordDisplay = document.getElementById('password');
 const openPassword = document.getElementById('open-password');
 const closePassword = document.getElementById('close-password');
+const inputError = document.getElementById('input-error');
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  inputError.style.display = "none";
+
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
+
+  if(!username || !password){
+    inputError.innerHTML = "<i class='bx bx-x error-user'></i>Please fill out all required fields.";
+    inputError.style.display = "flex";
+    return;
+  }
 
   try {
     const res = await fetch("https://illusia-backend.onrender.com/login", {
@@ -32,10 +41,11 @@ loginForm.addEventListener('submit', async (e) => {
       // redirect ไปหน้าอื่น (เช่น home)
       setTimeout(() => {
         window.location.href = "../index.html";
-      }, 1500);
+      }, 2000);
 
     } else {
-      showAlert(failAlert);
+      inputError.innerHTML = "<i class='bx bx-x error-user'></i>Invalid username or password.";
+      inputError.style.display = "flex";
     }
   } catch (error) {
     console.error("Error:", error);
