@@ -109,7 +109,7 @@ registerForm.addEventListener('submit', async (e) => {
             }, 2500);
             
         } else if(data.error === "Username already taken."){
-            emailError.innerHTML = "<i class='bx bx-x'></i>This Username is already taken."
+            usernameError.innerHTML = "<i class='bx bx-x'></i>This Username is already taken."
             usernameError.style.display = "flex";
         }else if(data.error === "Email already taken."){
             emailError.innerHTML = "<i class='bx bx-x'></i>This Email is already taken."
