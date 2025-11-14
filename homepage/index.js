@@ -32,8 +32,8 @@ async function createNewSave(saveName) {
     const newSaveData = {
         user_id: parseInt(userId),
         save_name: saveName, // ชื่อเซฟใหม่
-        current_scene: "scene_1",
-        scene_history: JSON.stringify(["scene_1"]), // ประวัติเริ่มที่ scene_1
+        current_scene: "1",
+        scene_history: JSON.stringify(["1"]), // ประวัติเริ่มที่ 1
         variables: JSON.stringify({}) // ตัวแปรว่าง
     };
 
@@ -312,10 +312,6 @@ logoutBtn.addEventListener("click", () => {
     window.location.reload();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.body.style.cursor = "wait";
-});
-
 window.addEventListener("load", () => {
     wakeUpAPI();
 
@@ -336,7 +332,6 @@ window.addEventListener("load", () => {
         startBtn.style.fontSize = "200%";
         settingBtn.style.fontSize = "200%";
         quitBtn.style.fontSize = "200%";
-        document.body.style.cursor = "url('../picture/Illusia_cursor.cur'), auto";
     }
 });
 

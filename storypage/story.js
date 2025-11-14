@@ -1,25 +1,29 @@
-const screen = document.getElementById("screen")
-const readBtn = document.getElementById("read-btn")
-const pauseBtn = document.getElementById("pause-btn")
-const characterBoxLeft = document.getElementById("character-box-left")
-const characterBoxRight = document.getElementById("character-box-right")
-const textBox = document.getElementById("text-box")
-const storyText = document.getElementById("story-text")
-const contiText = document.getElementById("conti-text")
-const readbook_container = document.getElementById("readbook-container")
-const book_text = document.getElementById("book-text")
-const choices = document.getElementById("choices")
-const choiceBtn1 = document.getElementById("choice-1")
-const choiceBtn2 = document.getElementById("choice-2")
-const background = document.getElementById("background")
-const allTextBox = document.getElementById("alltext-box")
-const allText = document.getElementById("all-text")
-const exitTextBtn = document.getElementById("exit-text-btn")
+const screen = document.getElementById("screen");
+const readBtn = document.getElementById("read-btn");
+const pauseBtn = document.getElementById("pause-btn");
+const characterBoxLeft = document.getElementById("character-box-left");
+const characterBoxRight = document.getElementById("character-box-right");
+const textBox = document.getElementById("text-box");
+const storyText = document.getElementById("story-text");
+const contiText = document.getElementById("conti-text");
+const readbook_container = document.getElementById("readbook-container");
+const book_text = document.getElementById("book-text");
+const choices = document.getElementById("choices");
+const choiceBtn1 = document.getElementById("choice-1");
+const choiceBtn2 = document.getElementById("choice-2");
+const background = document.getElementById("background");
+const allTextBox = document.getElementById("alltext-box");
+const allText = document.getElementById("all-text");
+const exitTextBtn = document.getElementById("exit-text-btn");
 
-const pauseMenu = document.getElementById("pause-menu")
-const resumeBtn = document.getElementById("resume-btn")
-const restartBtn = document.getElementById("restart-btn")
-const mainBtn = document.getElementById("main-btn")
+const pauseMenu = document.getElementById("pause-menu");
+const resumeBtn = document.getElementById("resume-btn");
+const restartBtn = document.getElementById("restart-btn");
+const mainBtn = document.getElementById("main-btn");
+
+const warningContainer = document.getElementById("warning-container");
+const warningCancel = document.getElementById("cancel-warning");
+const warningConfirm = document.getElementById("confirm-warning");
 
 const loadingScreen = document.getElementById("load-image");
 const preloadPercent = document.getElementById("preload-percent");
@@ -34,7 +38,7 @@ const music = document.getElementById("music");
 
 let sceneHistory = [];
 let gameVariables = {};
-let currentScene = "scene_1";
+let currentScene = "1";
 let activeSaveSlot = null;
 let autoSaveTimer = null;
 
@@ -43,6 +47,7 @@ let all_text = "";
 let isTyping = false;
 let advanceLock = false;
 let hasFinishedTyping = false;
+let pause = false;
 
 let story = {}
 const API_URL = "https://illusia-backend.onrender.com";
@@ -55,6 +60,7 @@ async function loadStoryFromBackend() {
         data.forEach(scene => {
             story[scene.scene_id] = {
                 text: scene.text,
+                music: scene.music,
                 background: scene.background,
                 character: scene.character,
                 characterleft: scene.character_left,
@@ -137,6 +143,10 @@ function loadScene(scene, skipHistoryPush = false) {
     if (!skipHistoryPush) {
         // ถ้าไม่ได้สั่งข้าม (เช่น เล่นปกติ) ให้เก็บประวัติ
         sceneHistory.push(scene);
+    }
+
+    if(sceneData.music){
+        music.src = sceneData.music;
     }
 
     triggerAutoSave();
@@ -294,6 +304,7 @@ function choiceSetup(sceneData) {
 }
 
 function proceedStory() {
+    if(pause) return;
     if (advanceLock || isTyping) return;
     const sceneData = story[currentScene];
 
@@ -324,7 +335,7 @@ function generateFlowchart() {
 
     // 2. ใช้อัลกอริทึม BFS สร้าง Map ทีละแถว (เหมือนเดิม)
     const allNodes = new Set();
-    let queue = ["scene_1"];
+    let queue = ["1"];
 
     while (queue.length > 0) {
         const rowDiv = document.createElement("div");
@@ -453,8 +464,8 @@ function checkAndLoadSave() {
     }
     // ถ้าไม่เจอ 'selected_save' (เช่น ไม่ได้ login หรือแค่กด Start)
     // ให้เริ่มเกมใหม่ปกติ
-    sceneHistory = ["scene_1"]; // 👈 เริ่มประวัติใหม่
-    currentScene = "scene_1";
+    sceneHistory = ["1"]; // 👈 เริ่มประวัติใหม่
+    currentScene = "1";
     return false; // ไม่มีการโหลด
 }
 
@@ -533,14 +544,17 @@ document.addEventListener("keydown", (e) => {
 });
 
 readBtn.addEventListener("click", () => {
+    pause = true;
     music.pause();
     background.style.display = "flex";
     allTextBox.style.display = "flex";
 });
 
 exitTextBtn.addEventListener("click", () => {
+    pause = false;
     background.style.display = "none";
     allTextBox.style.display = "none";
+    music.play();
 });
 
 background.addEventListener("click", () => {
@@ -552,6 +566,7 @@ background.addEventListener("click", () => {
 
 pauseBtn.addEventListener("click", () => {
     music.pause();
+    pause = true;
     background.style.display = "flex";
     pauseMenu.style.display = "flex";
 });
@@ -562,6 +577,7 @@ mapBtn.addEventListener("click", () => {
 
 resumeBtn.addEventListener("click", () => {
     music.play();
+    pause = false;
     background.style.display = "none";
     pauseMenu.style.display = "none";
 });
@@ -575,6 +591,7 @@ mainBtn.addEventListener("click", () => {
 });
 
 mapBtn.addEventListener("click", () => {
+    pause = true;
     // สร้าง Map ใหม่ทุกครั้ง
     generateFlowchart();
     // แสดง Map
@@ -583,12 +600,13 @@ mapBtn.addEventListener("click", () => {
 
 // เพิ่มปุ่มปิด Map
 closeMapBtn.addEventListener("click", () => {
+    pause = false;
     music.play();
     mapFrame.style.display = "none";
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.body.style.cursor = "wait";
+warningCancel.addEventListener("click", () =>{
+    window.location.href = "../index.html";
 });
 
 window.addEventListener("load", async () => {
@@ -608,12 +626,15 @@ window.addEventListener("load", async () => {
     if (saveLoaded) {
         rebuildTextLog();
     }
-    const savedMusicVolume = localStorage.getItem('musicVolume') || 70;
+    const savedMusicVolume = localStorage.getItem('musicVolume') || 50;
     music.volume = savedMusicVolume / 100;
 
     preloadAllImages(story, () => {
-        loadScene(currentScene, saveLoaded);
-        document.body.style.cursor = "url('../picture/Illusia_cursor.cur'), auto";
-        music.play();
+        warningContainer.style.display = "flex";
+        warningConfirm.addEventListener("click",() =>{
+            loadScene(currentScene, saveLoaded);
+            music.play();
+            warningContainer.style.display = "none";
+        });
     });
 });

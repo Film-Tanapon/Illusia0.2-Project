@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const defaultsBtn = document.getElementById('defaults-btn');
     const textSpeed = localStorage.getItem('textSpeed') || 2;
     const textSize = localStorage.getItem('textSize') || 'medium';
-    const musicVolume = localStorage.getItem('musicVolume') || 70;
+    const musicVolume = localStorage.getItem('musicVolume') || 50;
     const sfxVolume = localStorage.getItem('sfxVolume') || 60;
     const alertBackgound = this.getElementById('alert-background');
     const restoreAlert = this.getElementById('restore-alert');
@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('text-speed').value = 5;
         document.getElementById('text-speed-value').textContent = '5';
         document.getElementById('text-size').value = 'medium';
-        document.getElementById('music-volume').value = 70;
-        document.getElementById('music-volume-value').textContent = '70%';
+        document.getElementById('music-volume').value = 50;
+        document.getElementById('music-volume-value').textContent = '50%';
         document.getElementById('sfx-volume').value = 60;
         document.getElementById('sfx-volume-value').textContent = '60%';
         updateTextPreview();

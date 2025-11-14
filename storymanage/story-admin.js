@@ -5,6 +5,8 @@ const storyTable = document.getElementById("story-table");
 const cancelEditBtn = document.getElementById("cancel-edit");
 const formTitle = document.getElementById("form-title");
 
+document.getElementById("background").value = "../picture/background_story/";
+
 // โหลดฉากทั้งหมด
 async function loadStories() {
   const res = await fetch(API_URL);
@@ -38,6 +40,8 @@ storyForm.addEventListener("submit", async (e) => {
   const data = {
     scene_id: document.getElementById("scene_id").value.trim(),
     text: document.getElementById("text").value.trim() || null,
+    music: document.getElementById("music").value.trim() || null,
+    sfx: document.getElementById("sfx").value.trim() || null,
     background: document.getElementById("background").value.trim() || null,
     character: document.getElementById("character").value.trim() || null,
     character_left: document.getElementById("character_left").value.trim() || null,
@@ -84,7 +88,9 @@ async function editStory(scene_id) {
 
   document.getElementById("scene_id").value = story.scene_id;
   document.getElementById("text").value = story.text || "";
-  document.getElementById("background").value = story.background || "";
+  document.getElementById("music").value = story.music || "";
+  document.getElementById("sfx").value = story.sfx || "";
+  document.getElementById("background").value = story.background || "../picture/background_story/";
   document.getElementById("character").value = story.character || ""; // เพิ่ม
   document.getElementById("character_left").value = story.character_left || "";
   document.getElementById("character_right").value = story.character_right || "";
