@@ -23,6 +23,8 @@ const username = localStorage.getItem('username') || '';
 const API_URL = "https://illusia-backend.onrender.com";
 
 let dropdown = "close";
+let saveToDelete = null;
+let slotToDelete = null;
 
 async function createNewSave(saveName) {
     const userId = localStorage.getItem('user_id');
@@ -153,22 +155,26 @@ function buildSaveSlotsUI(saves) {
             deleteBtn.addEventListener("click", (e) => {
                 // 🛑 ป้องกันไม่ให้ Event วิ่งทะลุไปที่ infoDiv (กันโหลดเกม)
                 e.stopPropagation();
+                saveToDelete = save.id;
+                slotToDelete = slot;
                 deleteContainer.style.display = "flex";
-            });
-
-            confirmDelete.addEventListener("click", () => {
-                deleteSaveFile(save.id, slot); // ส่ง save.id และตัว slot ไป
-                deleteContainer.style.display = "none";
-            });
-
-            cancelDelete.addEventListener("click", () => {
-                deleteContainer.style.display = "none";
             });
 
             // (6) ประกอบร่าง: นำ info และปุ่มลบ ใส่ใน slot
             slot.appendChild(infoDiv);
             slot.appendChild(deleteBtn);
             slotsContainer.appendChild(slot);
+        });
+        
+        confirmDelete.addEventListener("click", () => {
+            deleteSaveFile(saveToDelete, slotToDelete);
+            saveToDelete = null;
+            slotToDelete = null;
+            deleteContainer.style.display = "none";
+        });
+
+        cancelDelete.addEventListener("click", () => {
+            deleteContainer.style.display = "none";
         });
     }
 
