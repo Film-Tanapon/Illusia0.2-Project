@@ -278,6 +278,7 @@ function rebuildTextLog() {
 }
 
 function choiceSetup(sceneData) {
+    advanceLock = false;
     textBox.style.display = "none";
     contiText.style.display = "none";
     characterBoxLeft.style.display = "none";
