@@ -196,6 +196,10 @@ function loadScene(scene, skipHistoryPush = false) {
         readbook_container.style.display = "flex";
         book_text.innerHTML = sceneData.diarytext.replace(/\n/g, "<br>").replace(/\\n/g, "<br>");
     }
+
+    if(sceneData.choice1 && sceneData.choice2){
+        choiceSetup(sceneData);
+    }
 }
 
 
