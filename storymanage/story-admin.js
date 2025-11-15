@@ -5,6 +5,8 @@ const storyTable = document.getElementById("story-table");
 const cancelEditBtn = document.getElementById("cancel-edit");
 const formTitle = document.getElementById("form-title");
 
+let next = "";
+
 document.getElementById("background").value = "../picture/background_story/";
 
 // โหลดฉากทั้งหมด
@@ -36,6 +38,8 @@ storyForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   
   const delayValue = document.getElementById("delay").value;
+
+  next = document.getElementById("next").value.trim();
   
   const data = {
     scene_id: document.getElementById("scene_id").value.trim(),
@@ -73,6 +77,8 @@ storyForm.addEventListener("submit", async (e) => {
     alert(editId ? "✅ แก้ไขฉากเรียบร้อย" : "✅ เพิ่มฉากใหม่เรียบร้อย");
     storyForm.reset();
     document.getElementById("edit-scene-id").value = "";
+    document.getElementById("scene_id").value = next;
+    document.getElementById("background").value = "../picture/background_story/";
     formTitle.textContent = "➕ เพิ่มฉากใหม่";
     cancelEditBtn.classList.add("hidden");
     loadStories();
