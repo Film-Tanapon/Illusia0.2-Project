@@ -50,6 +50,8 @@ let advanceLock = false;
 let hasFinishedTyping = false;
 let pause = false;
 
+const imageCache = {};
+
 let story = {}
 const API_URL = "https://illusia-backend.onrender.com";
 async function loadStoryFromBackend() {
@@ -87,40 +89,72 @@ async function loadStoryFromBackend() {
 }
 
 
-function preloadAllImages(storyObj, callback) {
-    const images = [];
-    for (const key in storyObj) {
-        const scene = storyObj[key];
-        if (scene.background) images.push(scene.background);
-        if (scene.characterleft) images.push(scene.characterleft);
-        if (scene.characterright) images.push(scene.characterright);
+function getNextSceneIds(sceneId, depth = 2) {
+    const nextIds = new Set();
+    let queue = [sceneId];
+
+    // กันพลาดเผื่อ story ยังไม่โหลด
+    if (!story || Object.keys(story).length === 0) return [];
+
+    for (let i = 0; i < depth; i++) {
+        const nextQueue = [];
+        for (const id of queue) {
+            const scene = story[id];
+            if (scene) {
+                if (scene.next) nextQueue.push(scene.next);
+                if (scene.choice1_next) nextQueue.push(scene.choice1_next);
+                if (scene.choice2_next) nextQueue.push(scene.choice2_next);
+            }
+        }
+        nextQueue.forEach(id => nextIds.add(id));
+        queue = [...new Set(nextQueue)]; // เอาตัวซ้ำออก
+    }
+    return [...nextIds];
+}
+
+function preloadScenes(sceneIds, onProgress, onComplete) {
+    if (!story) {
+        onComplete?.();
+        return;
     }
 
-    const total = images.length;
-    let loaded = 0;
+    const imagesToLoad = new Set();
+    const uniqueSceneIds = [...new Set(sceneIds)]; // กันฉากซ้ำ
 
-    images.forEach(src => {
+    uniqueSceneIds.forEach(sceneId => {
+        const scene = story[sceneId];
+        if (scene) {
+            if (scene.background) imagesToLoad.add(scene.background);
+            if (scene.characterleft) imagesToLoad.add(scene.characterleft);
+            if (scene.characterright) imagesToLoad.add(scene.characterright);
+        }
+    });
+
+    // กรองเอาเฉพาะรูปที่ยังไม่อยู่ใน cache
+    const newImages = [...imagesToLoad].filter(src => !imageCache[src]);
+
+    if (newImages.length === 0) {
+        onProgress?.(1, 1);
+        onComplete?.();
+        return;
+    }
+
+    let loaded = 0;
+    const total = newImages.length;
+
+    newImages.forEach(src => {
         const img = new Image();
         img.src = src;
+        imageCache[src] = img; // 👈 [สำคัญ] เก็บเข้า cache ทันที
+
         img.onload = img.onerror = () => {
             loaded++;
-            const percent = Math.round((loaded / total) * 100);
-            preloadBar.style.width = percent + "%";
-            preloadPercent.textContent = percent + "%";
-
+            onProgress?.(loaded, total);
             if (loaded === total) {
-                setTimeout(() => {
-                    loadingScreen.style.display = "none";
-                    callback();
-                }, 500);
+                onComplete?.();
             }
         };
     });
-
-    if (images.length === 0) {
-        loadingScreen.style.display = "none";
-        callback();
-    }
 }
 
 function loadScene(scene, skipHistoryPush = false) {
@@ -158,6 +192,11 @@ function loadScene(scene, skipHistoryPush = false) {
     }
 
     triggerAutoSave();
+
+    const nextScenesToPreload = getNextSceneIds(scene, 2);
+    if (nextScenesToPreload.length > 0) {
+        preloadScenes(nextScenesToPreload); 
+    }
 
     if (sceneData.delay) {
         setTimeout(() => {
@@ -601,12 +640,32 @@ window.addEventListener("load", async () => {
     const savedMusicVolume = localStorage.getItem('musicVolume') || 50;
     music.volume = savedMusicVolume / 100;
 
-    preloadAllImages(story, () => {
-        warningContainer.style.display = "flex";
-        warningConfirm.addEventListener("click",() =>{
-            loadScene(currentScene, saveLoaded);
-            music.play();
-            warningContainer.style.display = "none";
-        });
-    });
+    let initialScenesToLoad = getNextSceneIds(currentScene, 2); 
+    initialScenesToLoad.push(currentScene);
+    initialScenesToLoad.push("1");
+
+    preloadScenes(
+        initialScenesToLoad,
+        (loaded, total) => {
+            // [ใหม่] อัปเดต Loading Bar
+            const percent = Math.round((loaded / total) * 100) || 0;
+            preloadBar.style.width = percent + "%";
+            preloadPercent.textContent = percent + "%";
+        },
+        () => {
+            // [ใหม่] เมื่อโหลดเสร็จ (เหมือนใน preloadAllImages)
+            setTimeout(() => {
+                loadingScreen.style.display = "none";
+
+                // 3. แสดงหน้า Warning (เหมือนเดิม)
+                warningContainer.style.display = "flex";
+                warningConfirm.addEventListener("click", () => {
+                    loadScene(currentScene, saveLoaded);
+                    music.play();
+                    warningContainer.style.display = "none";
+                });
+
+            }, 500);
+        }
+    );
 });
