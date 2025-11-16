@@ -260,7 +260,6 @@ async function deleteSaveFile(saveId, slotElement) {
 
     } catch (err) {
         console.error("Error deleting save:", err);
-        alert("เกิดข้อผิดพลาดในการลบไฟล์เซฟ");
     }
 }
 

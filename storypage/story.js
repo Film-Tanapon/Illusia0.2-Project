@@ -34,6 +34,7 @@ const mapFrame = document.getElementById("map-frame");
 const mapContainer = document.getElementById("scene-block");
 const closeMapBtn = document.getElementById("close-map-btn");
 
+const sfx = document.getElementById("sfx");
 const music = document.getElementById("music");
 
 let sceneHistory = [];
@@ -64,6 +65,7 @@ async function loadStoryFromBackend() {
             story[scene.scene_id] = {
                 text: scene.text,
                 music: scene.music,
+                sfx: scene.sfx,
                 background: scene.background,
                 character: scene.character,
                 characterleft: scene.character_left,
@@ -189,6 +191,13 @@ function loadScene(scene, skipHistoryPush = false) {
 
     if(sceneData.music){
         music.src = sceneData.music;
+        music.play();
+    }
+
+    if(sceneData.sfx){
+        sfx.src = sceneData.sfx;
+        sfx.currentTime = 0;
+        sfx.play();
     }
 
     triggerAutoSave();
@@ -369,6 +378,7 @@ function proceedStory() {
         choiceSetup(sceneData);
     } else if (sceneData.next) {
         advanceLock = true;
+        sfx.pause();
         loadScene(sceneData.next);
     }
 }
@@ -521,6 +531,27 @@ async function autoSaveGame() {
     }
 }
 
+function findLastMusicInHistory() {
+    // ตรวจสอบว่ามี story และ sceneHistory พร้อมใช้งานหรือไม่
+    if (!story || !sceneHistory || sceneHistory.length === 0) {
+        return null;
+    }
+
+    // วนลูปย้อนหลังในประวัติทั้งหมด (รวมฉากปัจจุบันด้วย)
+    for (let i = sceneHistory.length - 1; i >= 0; i--) {
+        const sceneId = sceneHistory[i];
+        const sceneData = story[sceneId];
+
+        // ถ้าเจอฉากที่มี music, ให้คืนค่า URL ของเพลงนั้นทันที
+        if (sceneData && sceneData.music) {
+            return sceneData.music;
+        }
+    }
+    
+    // ถ้าวนจนหมดแล้วไม่เจอเพลงเลย, คืนค่า null
+    return null;
+}
+
 readbook_container.addEventListener("click", () => {
     if (advanceLock) return;
     readbook_container.style.display = "none";
@@ -638,7 +669,9 @@ window.addEventListener("load", async () => {
         rebuildTextLog();
     }
     const savedMusicVolume = localStorage.getItem('musicVolume') || 50;
+    const savedSFXVolume = localStorage.getItem('sfxVolume') || 60;
     music.volume = savedMusicVolume / 100;
+    sfx.volume = savedSFXVolume / 100;
 
     let initialScenesToLoad = getNextSceneIds(currentScene, 2); 
     initialScenesToLoad.push(currentScene);
@@ -660,8 +693,16 @@ window.addEventListener("load", async () => {
                 // 3. แสดงหน้า Warning (เหมือนเดิม)
                 warningContainer.style.display = "flex";
                 warningConfirm.addEventListener("click", () => {
+                    if (saveLoaded) {
+                    const lastMusic = findLastMusicInHistory();
+                    if (lastMusic) {
+                        music.src = lastMusic;
+                        }
+                    }
+
                     loadScene(currentScene, saveLoaded);
                     music.play();
+                    sfx.play();
                     warningContainer.style.display = "none";
                 });
 
