@@ -620,12 +620,15 @@ window.addEventListener("load", async () => {
     if(textsize === 'small'){
         storyText.style.fontSize = '16px';
         allText.style.fontSize = '16px';
+        readbook_container.style.fontSize = '16px';
     }else if(textsize === 'large'){
         storyText.style.fontSize = '22px';
         allText.style.fontSize = '22px';
+        readbook_container.style.fontSize = '22px';
     }else{
         storyText.style.fontSize = '18px';
         allText.style.fontSize = '18px';
+        readbook_container.style.fontSize = '18px';
     }
     
     const saveLoaded = checkAndLoadSave();
