@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,55 +9,57 @@
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <div class="screen" id="screen">
+        <div class="character-box-left" id="character-box-left"></div>
+        <div class="character-box-right" id="character-box-right"></div>
 
-        <button class = "read-btn" id = "read-btn"><i class='bx  bx-align-left'  ></i> </button>
-        <button class = "pause-btn" id = "pause-btn"><i class='bx  bx-pause'  ></i> </button>
-        <button class="map-btn" id="map-btn"><i class='bx  bx-map'    ></i></i></button>
-
-        <div class = "character-box-left" id = "character-box-left"></div>
-        <div class = "character-box-right" id = "character-box-right"></div>
-
-        <div class = "text-box" id = "text-box">
-            <p class = "story-text" id = "story-text"></p>
-            <p class = "conti-text" id = "conti-text">Click or Spacebar</p>
+        <div class="text-box" id="text-box">
+            <p class="story-text" id="story-text"></p>
+            <p class="conti-text" id="conti-text">Click or Spacebar</p>
         </div>
 
-        <div class = "readbook-container" id = "readbook-container">
-            <p class = "book-text" id = "book-text"></p>
-        </div>
-        
-        <div class = "choices" id = "choices">
-            <div class = choice-1 id="choice-1"></div>
-            <div class = choice-2 id="choice-2"></div>
+        <div class="readbook-container" id="readbook-container">
+            <p class="book-text" id="book-text"></p>
         </div>
 
-        <div class = "background" id= "background"></div>
-            <div class = "alltext-box" id="alltext-box">
-                <p class = "all-text" id = "all-text"></p>
-                <button class="exit-text-btn" id="exit-text-btn"><i class='bx  bx-x'  ></i> </button>
-            </div>
-
-            <div class = "pause-menu" id="pause-menu">
-                <button class = "resume-btn" id = "resume-btn">Resume</button>
-                <button class = "restart-btn" id = "restart-btn">Restart</button>
-                <button class = "main-btn" id = "main-btn">Main Menu</button>
-            </div>
+        <div class="choices" id="choices">
+            <div class=choice-1 id="choice-1"></div>
+            <div class=choice-2 id="choice-2"></div>
         </div>
     </div>
 
-    <div class="warning-container" id = "warning-container">
-        <p class = "warning-title"id = "warning-title">เกมนี้มีภาพ เสียง และเนื้อหาที่ไม่เหมาะสมสำหรับผู้เยาว์ และอาจก่อให้เกิดความไม่สบายใจ ผู้เล่นที่มีภาวะลมชักไวต่อแสง ภาวะหัวใจอ่อนแอ หรือภาวะวิตกกังวลรุนแรง ควรใช้ความระมัดระวังในการเล่น
-ท่านต้องการดำเนินการเข้าสู่เกมต่อหรือไม่?</p>
-        <div class = "warning-btn-box" id = "warning-btn-box">
-            <button class = "cancel-warning" id = "cancel-warning">ยกเลิก</button>
-            <button class = "confirm-warning" id = "confirm-warning">ยืนยัน</button>
+    <button class="read-btn" id="read-btn"><i class='bx  bx-align-left'></i> </button>
+    <button class="pause-btn" id="pause-btn"><i class='bx  bx-pause'></i> </button>
+    <button class="map-btn" id="map-btn"><i class='bx  bx-map'></i></i></button>
+
+    <div class="background" id="background"></div>
+        <div class="alltext-box" id="alltext-box">
+            <p class="all-text" id="all-text"></p>
+            <button class="exit-text-btn" id="exit-text-btn"><i class='bx  bx-x'></i> </button>
+        </div>
+
+        <div class="pause-menu" id="pause-menu">
+            <button class="resume-btn" id="resume-btn">Resume</button>
+            <button class="restart-btn" id="restart-btn">Restart</button>
+            <button class="main-btn" id="main-btn">Main Menu</button>
         </div>
     </div>
 
-    <div class = "load-image" id= "load-image">
-        <h class = "loading-text" id = "loading-text">Loading...</h>
+    <div class="warning-container" id="warning-container">
+        <p class="warning-title" id="warning-title">เกมนี้มีภาพ เสียง และเนื้อหาที่ไม่เหมาะสมสำหรับผู้เยาว์
+            และอาจก่อให้เกิดความไม่สบายใจ ผู้เล่นที่มีภาวะลมชักไวต่อแสง ภาวะหัวใจอ่อนแอ หรือภาวะวิตกกังวลรุนแรง
+            ควรใช้ความระมัดระวังในการเล่น
+            ท่านต้องการดำเนินการเข้าสู่เกมต่อหรือไม่?</p>
+        <div class="warning-btn-box" id="warning-btn-box">
+            <button class="cancel-warning" id="cancel-warning">ยกเลิก</button>
+            <button class="confirm-warning" id="confirm-warning">ยืนยัน</button>
+        </div>
+    </div>
+
+    <div class="load-image" id="load-image">
+        <h class="loading-text" id="loading-text">Loading...</h>
 
         <div class="preload-wrapper">
             <div class="preload-container">
@@ -66,13 +69,15 @@
         </div>
     </div>
 
-    <div class = "map-frame" id = "map-frame">
+    <div class="map-frame" id="map-frame">
         <button class="close-map-btn" id="close-map-btn"><i class='bx bx-x'></i></button>
-        <div class = "scene-block" id = "scene-block"></div>
-    </div>
-    
-    <audio id = "music" src="../sound/sound.mp3"></audio>
-    
+                <div class="scene-block" id="scene-block"></div>
+           
+    </div>
+
+    <audio id="music" src="../sound/sound.mp3"></audio>
+
     <script src="story.js"></script>
 </body>
+
 </html>

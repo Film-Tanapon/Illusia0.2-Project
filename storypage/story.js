@@ -41,6 +41,7 @@ let gameVariables = {};
 let currentScene = "1";
 let activeSaveSlot = null;
 let autoSaveTimer = null;
+let endscene = ["BadEnd", "DeathEnd", "TrueEnd"];
 
 let typeInterval = null;
 let all_text = "";
@@ -143,6 +144,13 @@ function loadScene(scene, skipHistoryPush = false) {
     if (!skipHistoryPush) {
         // ถ้าไม่ได้สั่งข้าม (เช่น เล่นปกติ) ให้เก็บประวัติ
         sceneHistory.push(scene);
+    }
+
+    if (endscene.includes(currentScene)) {
+        mapBtn.style.display = "flex";
+        readBtn.style.display = "flex";
+        pauseBtn.style.display = "flex";
+        return;
     }
 
     if(sceneData.music){
@@ -313,8 +321,8 @@ function proceedStory() {
     if (advanceLock || isTyping) return;
     const sceneData = story[currentScene];
 
-    if (currentScene === "end") {
-        window.location.href = "index.html";
+    if (endscene.includes(currentScene)) {
+        window.location.href = "../index.html";
         return;
     }
 
@@ -326,91 +334,44 @@ function proceedStory() {
     }
 }
 
-/**
- * สร้างและแสดงผล Flowchart
- * 🚀 [แก้ไข: แสดงเฉพาะฉากที่เคยเล่นถึง (Visited)]
- */
 function generateFlowchart() {
-    // เคลียร์ Map เก่า
+    // 1. เคลียร์ Map เก่า
     mapContainer.innerHTML = "";
 
-    // 1. 🚀 (สำคัญ) เอา 'knownScenes' และ 'for loop' ออก
-    // เราต้องการแค่ Set ของฉากที่เคยไปแล้ว
-    const visitedScenes = new Set(sceneHistory);
+    // 2. 🚀 [ใหม่] วนลูปตามประวัติการเล่น (sceneHistory)
+    // เราจะแสดงเฉพาะฉากที่ผู้เล่นเคยผ่านมาแล้วเท่านั้น
+    for (let i = 0; i < sceneHistory.length; i++) {
+        const sceneId = sceneHistory[i];
+        const scene = story[sceneId];
 
-    // 2. ใช้อัลกอริทึม BFS สร้าง Map ทีละแถว (เหมือนเดิม)
-    const allNodes = new Set();
-    let queue = ["1"];
-
-    while (queue.length > 0) {
-        const rowDiv = document.createElement("div");
-        rowDiv.className = "flow-row";
-
-        const nextQueue = [];
-        let nextRowHasVisitedNodes = false; // 👈 [เพิ่ม] เช็กว่าแถวถัดไปมี Node ที่เราเคยไปไหม
-
-        // 3. วนลูปสร้าง Node ทั้งหมดในแถวปัจจุบัน
-        for (const sceneId of queue) {
-            if (allNodes.has(sceneId)) continue;
-
-            const scene = story[sceneId];
-            if (!scene) continue;
-
-            allNodes.add(sceneId);
-
-            // 4. สร้าง Node
-            const node = document.createElement("div");
-            node.className = "flow-node";
-
-            // 🚀 [เพิ่ม] ตั้งค่ารูปภาพ (จากโค้ดก่อนหน้า)
-            if (scene.background) {
-                node.style.backgroundImage = `url(${scene.background})`;
-            } else {
-                node.textContent = sceneId;
-                node.style.backgroundColor = "#111";
-            }
-
-            // 5. 🚀 [แก้ไข] กำหนดสถานะ
-            if (visitedScenes.has(sceneId)) {
-                node.classList.add("visited");
-            } else {
-                // ถ้ายังไม่เคยไป ให้ซ่อนเลย
-                node.classList.add("unknown"); // (CSS สั่ง display: none)
-            }
-
-            // 🚀 [สำคัญ] เราต้อง appendChild 'ทุก' Node 
-            // (แม้แต่ Node ที่ซ่อนอยู่) เพื่อรักษา Layout ของ Flexbox
-            rowDiv.appendChild(node);
-
-            // 6. เพิ่มฉากถัดไป (Next/Choices) ลงในคิว (เหมือนเดิม)
-            if (scene.next && !allNodes.has(scene.next)) {
-                nextQueue.push(scene.next);
-                // 🚀 [เพิ่ม] เช็กว่าฉากถัดไปที่เราจะไปต่อนั้น 'เคยไป' หรือไม่
-                if (visitedScenes.has(scene.next)) nextRowHasVisitedNodes = true;
-            }
-            if (scene.choice1_next && !allNodes.has(scene.choice1_next)) {
-                nextQueue.push(scene.choice1_next);
-                if (visitedScenes.has(scene.choice1_next)) nextRowHasVisitedNodes = true;
-            }
-            if (scene.choice2_next && !allNodes.has(scene.choice2_next)) {
-                nextQueue.push(scene.choice2_next);
-                if (visitedScenes.has(scene.choice2_next)) nextRowHasVisitedNodes = true;
-            }
+        // 3. ถ้าไม่มีฉาก หรือฉากไม่มีรูปพื้นหลัง ก็ข้ามไป
+        // (เราสนใจเฉพาะฉากที่มีรูปภาพ)
+        if (!scene || !scene.background) {
+            continue;
         }
 
-        // 7. เพิ่มแถว (Row) ลงใน Map
-        mapContainer.appendChild(rowDiv);
+        // 4. สร้าง Node (รูปภาพ)
+        const node = document.createElement("div");
+        node.className = "flow-node visited"; // ใช้ class เดิมเพื่อให้ CSS ทำงาน
+        node.style.backgroundImage = `url(${scene.background})`;
 
-        // 8. 🚀 [แก้ไข] เพิ่มเส้นเชื่อม (Line)
-        // ต่อเมื่อ 'แถวถัดไป' มี Node ที่เรา 'เคยไป' เท่านั้น
-        if (nextQueue.length > 0 && nextRowHasVisitedNodes) {
-            const line = document.createElement("div");
-            line.className = "flow-line";
-            mapContainer.appendChild(line);
+        // 5. 🚀 [สำคัญ] เพิ่ม Node ลงใน mapContainer โดยตรง
+        mapContainer.appendChild(node);
+
+        // 6. 🚀 [ใหม่] เพิ่มเส้นเชื่อม (Line) ระหว่าง Node
+        // (ตราบใดที่นี่ไม่ใช่ Node สุดท้าย)
+        if (i < sceneHistory.length - 1) {
+            
+            // เช็กซ้ำอีกทีว่าฉากถัดไปในประวัติมีรูปไหม ถ้าไม่มีก็ไม่ต้องลากเส้น
+            const nextSceneId = sceneHistory[i + 1];
+            const nextScene = story[nextSceneId];
+            
+            if (nextScene && nextScene.background) {
+                const line = document.createElement("div");
+                line.className = "flow-line";
+                mapContainer.appendChild(line);
+            }
         }
-
-        // 9. อัปเดตคิว (เหมือนเดิม)
-        queue = [...new Set(nextQueue)];
     }
 }
 
