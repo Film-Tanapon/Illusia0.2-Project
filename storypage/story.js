@@ -182,13 +182,6 @@ function loadScene(scene, skipHistoryPush = false) {
         sceneHistory.push(scene);
     }
 
-    if (endscene.includes(currentScene)) {
-        mapBtn.style.display = "flex";
-        readBtn.style.display = "flex";
-        pauseBtn.style.display = "flex";
-        return;
-    }
-
     if(sceneData.music){
         music.src = sceneData.music;
         music.play();
@@ -198,6 +191,13 @@ function loadScene(scene, skipHistoryPush = false) {
         sfx.src = sceneData.sfx;
         sfx.currentTime = 0;
         sfx.play();
+    }
+
+    if (endscene.includes(currentScene)) {
+        mapBtn.style.display = "flex";
+        readBtn.style.display = "flex";
+        pauseBtn.style.display = "flex";
+        return;
     }
 
     triggerAutoSave();
@@ -370,7 +370,6 @@ function proceedStory() {
     const sceneData = story[currentScene];
 
     if (endscene.includes(currentScene)) {
-        window.location.href = "../index.html";
         return;
     }
 
@@ -595,6 +594,7 @@ exitTextBtn.addEventListener("click", () => {
 
 background.addEventListener("click", () => {
     music.play();
+    pause = false;
     background.style.display = "none";
     allTextBox.style.display = "none";
     pauseMenu.style.display = "none";
