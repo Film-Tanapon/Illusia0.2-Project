@@ -89,7 +89,7 @@ async function loadStoryFromBackend() {
 }
 
 
-function getNextSceneIds(sceneId, depth = 2) {
+function getNextSceneIds(sceneId, depth = 3) {
     const nextIds = new Set();
     let queue = [sceneId];
 
