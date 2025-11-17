@@ -580,7 +580,6 @@ document.addEventListener("keydown", (e) => {
 
 readBtn.addEventListener("click", () => {
     pause = true;
-    music.pause();
     background.style.display = "flex";
     allTextBox.style.display = "flex";
 });
@@ -589,7 +588,6 @@ exitTextBtn.addEventListener("click", () => {
     pause = false;
     background.style.display = "none";
     allTextBox.style.display = "none";
-    music.play();
 });
 
 background.addEventListener("click", () => {
