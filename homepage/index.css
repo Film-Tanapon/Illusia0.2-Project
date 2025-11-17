@@ -26,6 +26,7 @@ body {
     min-height: 100vh;
     width: auto;
     height: auto;
+    object-fit: cover;
     
     z-index: -1; 
     
