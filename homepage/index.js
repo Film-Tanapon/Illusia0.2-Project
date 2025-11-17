@@ -321,7 +321,8 @@ logoutBtn.addEventListener("click", () => {
 
 window.addEventListener("load", () => {
     wakeUpAPI();
-    music.volume = 50 / 100;
+    const musicVolume = localStorage.getItem('musicVolume') || 50;
+    music.volume = musicVolume / 100;
     music.play();
 
     if (username) {
