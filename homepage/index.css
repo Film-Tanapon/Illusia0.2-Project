@@ -5,13 +5,6 @@
 }
 
 body {
-    /* เปลี่ยน background-size เป็น cover เพื่อให้ภาพเต็มจอเสมอ และไม่เหลือขอบดำ */
-    background-image: url("../picture/Index_image.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: cover;
-    /* แก้ไขตรงนี้ */
 
     /* จัดองค์ประกอบหลักให้อยู่ตรงกลาง (เป็นจุดเริ่มต้นที่ดีสำหรับการจัดวาง) */
     display: flex;
@@ -25,6 +18,23 @@ body {
     background-color: black;
     overflow: hidden;
     /* ยังคงป้องกันการเลื่อน */
+}
+
+.video-background {
+    position: fixed; /* หรือ absolute ก็ได้ถ้า body คือ container หลัก */
+    top: 0;
+    left: 0;
+    width: 100vw;  /* กว้างเต็ม 100% ของหน้าจอ */
+    height: 100vh; /* สูงเต็ม 100% ของหน้าจอ */
+    z-index: -1;   /* ⭐️ สำคัญมาก: ส่งไปไว้ด้านหลังสุด (หลังปุ่ม, หลังทุกอย่าง) */
+    overflow: hidden; /* ป้องกันแถบเลื่อนที่อาจเกิดขึ้นจาก video */
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    /* ⭐️ นี่คือหัวใจหลักที่ทำหน้าที่เหมือน background-size: cover */
+    object-fit: cover; 
 }
 
 .login-container {
