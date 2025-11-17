@@ -26,11 +26,9 @@ body {
     min-height: 100vh;
     width: auto;
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
     
     z-index: -1; 
-    
-    object-fit: cover; 
 }
 
 .login-container {
