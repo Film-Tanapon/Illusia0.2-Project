@@ -5,30 +5,26 @@
 }
 
 body {
+    /* เปลี่ยน background-size เป็น cover เพื่อให้ภาพเต็มจอเสมอ และไม่เหลือขอบดำ */
+    background-image: url("../picture/Index_image.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    /* แก้ไขตรงนี้ */
+
+    /* จัดองค์ประกอบหลักให้อยู่ตรงกลาง (เป็นจุดเริ่มต้นที่ดีสำหรับการจัดวาง) */
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* เปลี่ยนเป็น center เพื่อให้เนื้อหาหลัก (ปุ่ม) สามารถจัดกึ่งกลางได้ง่ายขึ้น */
     justify-content: center;
 
     min-height: 100vh;
     margin: 0;
     background-color: black;
     overflow: hidden;
-}
-
-#background-video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    min-width: 100vw;
-    min-height: 100vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    
-    z-index: -1; 
+    /* ยังคงป้องกันการเลื่อน */
 }
 
 .login-container {
