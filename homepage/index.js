@@ -18,6 +18,8 @@ const deleteContainer = document.getElementById("delete-container");
 const cancelDelete = document.getElementById("cancel-del");
 const confirmDelete = document.getElementById("confirm-del");
 
+const music = document.getElementById("music");
+
 const username = localStorage.getItem('username') || '';
 
 const API_URL = "https://illusia-backend.onrender.com";
@@ -319,6 +321,8 @@ logoutBtn.addEventListener("click", () => {
 
 window.addEventListener("load", () => {
     wakeUpAPI();
+    music.volume = 50 / 100;
+    music.play();
 
     if (username) {
         login.textContent = username;
